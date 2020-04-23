@@ -1,7 +1,12 @@
 #include <iostream>
+#include <string>
+#include "Menu.h"
+
 using namespace std;
 
-int main {
-	
-	int x=0;
+int main(){
+
+	Menu_Principale();
+
+	return 0;
 }
