@@ -8,6 +8,17 @@ using namespace std;
 
 int main(){
 
+	vector<Libro> lista_libri;
+
+	init(lista_libri);
+
+	Aggiunta_Libro(lista_libri);
+
+	PrintLibro(lista_libri.at(0));
+	PrintLibro(lista_libri.at(1));
+	PrintLibro(lista_libri.at(2));
+	PrintLibro(lista_libri.at(3));
+	/*
 	Libro prova0, prova1, prova2;
 
 	prova0.SetTitolo("uno");
@@ -40,6 +51,7 @@ cout << "capacity: " << array.capacity() << " "
 PrintLibro(array.at(0));
 PrintLibro(array.at(1));
 PrintLibro(array.at(2));
+*/
 
 	return 0;
 }
