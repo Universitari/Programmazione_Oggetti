@@ -20,9 +20,8 @@ void init(vector<Libro> &l) {
   float tmp_float;
   unsigned int tmp_int;
 
-  while (!input.eof()){
+  while (input >> tmp_string){
 
-    input >> tmp_string;
       tmp_libro.SetTitolo(tmp_string);
     input >> tmp_string;
       tmp_libro.SetAutore(tmp_string);
@@ -39,7 +38,7 @@ void init(vector<Libro> &l) {
 
     l.push_back(tmp_libro);
 
-  }
+  };
 
   input.close();
 };
