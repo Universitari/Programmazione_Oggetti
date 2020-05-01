@@ -12,12 +12,10 @@ int main(){
 
 	init(lista_libri);
 
-	Aggiunta_Libro(lista_libri);
+	lista_libri.at(0).SetQuantita(lista_libri.at(0).GetQuantita() - 1);
 
 	PrintLibro(lista_libri.at(0));
-	PrintLibro(lista_libri.at(1));
-	PrintLibro(lista_libri.at(2));
-	PrintLibro(lista_libri.at(3));
+
 	/*
 	Libro prova0, prova1, prova2;
 

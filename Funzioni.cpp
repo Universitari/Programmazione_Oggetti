@@ -87,3 +87,32 @@ void PrintLibro(const Libro tmp){
        << tmp.GetQuantita() <<endl
        << tmp.GetOrdinati() <<endl;
 }
+
+void Vendita(vector<Libro> &l, vector<Acquisti> &a){
+
+  string ISBN_Venduto;
+  int indice = -1;
+  Acquisto tmp;
+
+  while (indice == -1){
+
+    cout << "Inserire l'ISBN del libro venduto: ";
+
+    cin >> ISBN_Venduto;
+
+    indice = RicercaISBN(ISBN_Venduto);
+
+    if (indice == -1)
+        cout << "ISBN errato o inesistente!\n";
+  }
+
+  l.at(indice).SetQuantita(l.at(indice).GetQuantita() - 1);
+
+  tmp.SetISBN_Acq(ISBN_Venduto);
+  tmp.SetTessera();
+  tmp.SetPrezzo_Acq();
+  tmp.SetData();
+
+  a.push_back(tmp);
+
+}
