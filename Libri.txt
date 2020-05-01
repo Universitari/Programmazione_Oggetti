@@ -1,2 +1,2 @@
-Libro1 Armando 2937864238764 In_stock 29.90 10 0
-Libro2 Paolo 92837474 In_Stock 33.10 5 0
+Libro1 Armando 2937864238764 29.90 10 0
+Libro2 Paolo 92837474 33.10 5 0

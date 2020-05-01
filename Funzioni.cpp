@@ -28,8 +28,6 @@ void init(vector<Libro> &l) {
     input >> tmp_string;
       tmp_libro.SetISBN(tmp_string);
     input >> tmp_string;
-      tmp_libro.SetStato(tmp_string);
-    input >> tmp_float;
       tmp_libro.SetPrezzo(tmp_float);
     input >> tmp_int;
       tmp_libro.SetQuantita(tmp_int);
@@ -47,8 +45,8 @@ void Aggiunta_Libro(vector<Libro> &l){
 
   Libro tmp_libro;
   string tmp_string;
-  float tmp_float;
-  unsigned int tmp_int;
+  float tmp_float = 0;
+  unsigned int tmp_int = 0;
 
   cout << "AGGIUNTA LIBRO\n";
 
@@ -63,10 +61,6 @@ void Aggiunta_Libro(vector<Libro> &l){
     cout << "ISBN: ";
     cin >> tmp_string;
       tmp_libro.SetISBN(tmp_string);
-
-    cout << "Stato: ";
-    cin >> tmp_string;
-      tmp_libro.SetStato(tmp_string);
 
       cout << "Prezzo: ";
     cin >> tmp_float;
@@ -89,7 +83,6 @@ void PrintLibro(const Libro tmp){
   cout << tmp.GetTitolo() <<endl
        << tmp.GetAutore() <<endl
        << tmp.GetISBN() <<endl
-       << tmp.GetStato() <<endl
        << tmp.GetPrezzo() <<endl
        << tmp.GetQuantita() <<endl
        << tmp.GetOrdinati() <<endl;
