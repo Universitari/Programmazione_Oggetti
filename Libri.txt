@@ -1,5 +1,5 @@
 La_fattoria_degli_animali George_Orwell 978-88-04-66792-6 12.00 3 0
 1984 George_Orwell 978-88-04-66823-7 14.00 2 1
-Le_avventure_del_barone_di_Munchhausen Rudolf_Erich_Raspe 978-88-17-05054-8 4 3
-Il_ritratto_di_dorian_gray Oscar_wilde 978-88-09-77288-5 1 2
-L'impero_nel_caos Anthony_Reynolds 978-88-04-58987-7 2 0
+Le_avventure_del_barone_di_Munchhausen Rudolf_Erich_Raspe 978-88-17-05054-8 7.90 4 3
+Il_ritratto_di_dorian_gray Oscar_wilde 978-88-09-77288-5 8.00 1 2
+L'impero_nel_caos Anthony_Reynolds 978-88-04-58987-7 9.00 2 0
