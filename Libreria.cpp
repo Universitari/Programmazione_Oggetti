@@ -9,10 +9,9 @@ using namespace std;
 int main(){
 
 	vector<Libro> lista_libri;
+	vector<Acquisti> lista_acquisti;
 
 	init(lista_libri);
-
-	lista_libri.at(0).SetQuantita(lista_libri.at(0).GetQuantita() - 1);
 
 	PrintLibro(lista_libri.at(0));
 

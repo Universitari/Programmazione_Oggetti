@@ -92,7 +92,8 @@ void Vendita(vector<Libro> &l, vector<Acquisti> &a){
 
   string ISBN_Venduto;
   int indice = -1;
-  Acquisto tmp;
+  int copie_vendute;
+  Acquisti tmp;
 
   while (indice == -1){
 
@@ -106,7 +107,10 @@ void Vendita(vector<Libro> &l, vector<Acquisti> &a){
         cout << "ISBN errato o inesistente!\n";
   }
 
-  l.at(indice).SetQuantita(l.at(indice).GetQuantita() - 1);
+  cout << "Inserire numero di copie vendute: ";
+  cin >> copie_vendute;
+
+  l.at(indice).RiduciQuantita(copie_vendute);
 
   tmp.SetISBN_Acq(ISBN_Venduto);
   tmp.SetTessera();

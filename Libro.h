@@ -29,8 +29,8 @@ class Libro {
     unsigned int GetQuantita() const {return Quantita;};
     unsigned int GetOrdinati() const {return Ordinati;};
 
+    void RiduciQuantita(int tmp) {Quantita = Quantita - tmp;};
+
     Libro& operator=(const Libro &tmp);
-
-
 
 };
