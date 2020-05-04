@@ -12,3 +12,5 @@ void PrintLibro(const Libro tmp);
 void PrintAcquisto(const Acquisto tmp);
 int RicercaISBN(vector<Libro> &l, const string tmp);
 void Vendita(vector<Libro> &l, vector<Acquisto> &a);
+short int MaxGiorno(short int m, short int y);
+Data InserimentoData();

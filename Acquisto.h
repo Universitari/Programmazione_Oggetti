@@ -23,7 +23,7 @@ class Acquisto {
     void SetISBN_Acq(string tmp){ ISBN = tmp;};
     void SetTessera(unsigned int tmp) {Numero_tessera = tmp;};
     void SetPrezzo_Acq(float tmp);
-    void SetData();
+    void SetData(Data tmp) {DataVendita = tmp;};
 
     string GetISBN_Acq() const {return ISBN;};
     unsigned int GetNumero_tessera() const {return Numero_tessera;};

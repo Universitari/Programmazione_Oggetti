@@ -130,6 +130,7 @@ void Vendita(vector<Libro> &l, vector<Acquisto> &a){
   int tmp_int;
   float tmp_float;
   Acquisto acq;
+  Data tmp_data;
 
   while (indice == -1){
 
@@ -157,8 +158,85 @@ void Vendita(vector<Libro> &l, vector<Acquisto> &a){
 
   acq.SetPrezzo_Acq(l.at(indice).GetPrezzo());
 
-  acq.SetData();
+  tmp_data = InserimentoData();
+  acq.SetData(tmp_data);
 
   a.push_back(acq);
+
+}
+
+short int MaxGiorno(short int m, short int y){
+
+	switch (m){
+
+	    case 4:
+	    case 6:
+	    case 9:
+	    case 11:{
+
+		    return 30;
+		    break;
+	    }
+
+    	case 2:{
+
+    	    if (y % 400 == 0 || (y % 4 == 0 && y % 100 != 0))
+    	         return 29;
+    	    else return 28;
+    		break;
+    	}
+
+    	default:{
+
+    		return 31;
+    		break;
+    	}
+
+
+    	}
+}
+
+Data InserimentoData(){
+
+  short int d,m,y;
+  Data tmp;
+  bool flag = true;
+
+  cout << "Inserire la data della vendita\n";
+
+  do {
+  cout << "Giorno: ";
+  cin >> d;
+
+  cout << "Mese: ";
+  cin >> m;
+
+  cout << "Anno: ";
+  cin >> y;
+
+  if (y < 1900){
+    cout << "Anno non valido. Reinserire la data.\n";
+    continue;
+  }
+
+  if (m < 1 || m > 12){
+    cout << "Mese non valido. Reinserire la data.\n";
+    continue;
+  }
+
+  if (d < 1 || d > MaxGiorno(m, y)){
+    cout << "Giorno non valido. Reinserire la data.\n";
+    continue;
+  }
+
+flag = false;
+
+} while(flag);
+
+tmp.Giorno = d;
+tmp.Mese = m;
+tmp.Anno = y;
+
+return tmp;
 
 }
