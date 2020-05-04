@@ -14,6 +14,7 @@ int main(){
 	init(lista_libri);
 
 	PrintLibro(lista_libri.at(0));
+	PrintLibro(lista_libri.at(1));
 
 	/*
 	Libro prova0, prova1, prova2;

@@ -20,18 +20,22 @@ void init(vector<Libro> &l) {
   float tmp_float;
   unsigned int tmp_int;
 
-  while (input >> tmp_string){
+  while (!input.eof()){
 
+    getline(input, tmp_string, ',');
       tmp_libro.SetTitolo(tmp_string);
-    input >> tmp_string;
+    getline(input, tmp_string, ',');
       tmp_libro.SetAutore(tmp_string);
-    input >> tmp_string;
+    getline(input, tmp_string, ',');
       tmp_libro.SetISBN(tmp_string);
-    input >> tmp_string;
+    input >> tmp_float;
+    input.ignore(1);
       tmp_libro.SetPrezzo(tmp_float);
     input >> tmp_int;
+    input.ignore(1);
       tmp_libro.SetQuantita(tmp_int);
     input >> tmp_int;
+    input.ignore(1);
       tmp_libro.SetOrdinati(tmp_int);
 
     l.push_back(tmp_libro);
@@ -88,6 +92,8 @@ void PrintLibro(const Libro tmp){
        << tmp.GetOrdinati() <<endl;
 }
 
+/*
+
 void Vendita(vector<Libro> &l, vector<Acquisti> &a){
 
   string ISBN_Venduto;
@@ -120,3 +126,5 @@ void Vendita(vector<Libro> &l, vector<Acquisti> &a){
   a.push_back(tmp);
 
 }
+
+*/
