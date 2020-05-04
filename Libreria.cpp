@@ -9,16 +9,15 @@ using namespace std;
 int main(){
 
 	vector<Libro> lista_libri;
-	vector<Acquisti> lista_acquisti;
+	vector<Acquisto> lista_acquisti;
 
 	init(lista_libri);
 
-	PrintLibro(lista_libri.at(0));
-	PrintLibro(lista_libri.at(1));
-	PrintLibro(lista_libri.at(2));
+	Vendita(lista_libri, lista_acquisti);
+
+	PrintAcquisto(lista_acquisti.at(0));
+
 	PrintLibro(lista_libri.at(3));
-	PrintLibro(lista_libri.at(4));
-	PrintLibro(lista_libri.at(5));
 
 	/*
 	Libro prova0, prova1, prova2;

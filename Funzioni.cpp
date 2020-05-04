@@ -65,7 +65,13 @@ void Aggiunta_Libro(vector<Libro> &l){
 
     cout << "ISBN: ";
     cin >> tmp_string;
-      tmp_libro.SetISBN(tmp_string);
+
+    if (RicercaISBN(l, tmp_string) != -1){
+      cout << "Errore, ISBN già presente.";
+      exit(0);
+    }
+
+    tmp_libro.SetISBN(tmp_string);
 
       cout << "Prezzo: ";
     cin >> tmp_float;
@@ -93,14 +99,37 @@ void PrintLibro(const Libro tmp){
        << tmp.GetOrdinati() <<endl;
 }
 
-/*
+void PrintAcquisto(const Acquisto tmp){
 
-void Vendita(vector<Libro> &l, vector<Acquisti> &a){
+  cout << tmp.GetISBN_Acq() << endl
+       << tmp.GetNumero_tessera() << endl
+       << tmp.GetPrezzo_Acq() << endl
+       << tmp.GetData().Giorno << "/"
+       << tmp.GetData().Mese << "/"
+       << tmp.GetData().Anno << endl;
+}
+
+int RicercaISBN(vector<Libro> &l, const string tmp){
+
+  int i = 0;
+
+  while (i < l.size()) {
+    if (tmp.compare(l.at(i).GetISBN()) == 0)
+        return i;
+  i++;
+
+  }
+
+  return(-1);
+}
+
+void Vendita(vector<Libro> &l, vector<Acquisto> &a){
 
   string ISBN_Venduto;
   int indice = -1;
-  int copie_vendute;
-  Acquisti tmp;
+  int tmp_int;
+  float tmp_float;
+  Acquisto acq;
 
   while (indice == -1){
 
@@ -108,24 +137,28 @@ void Vendita(vector<Libro> &l, vector<Acquisti> &a){
 
     cin >> ISBN_Venduto;
 
-    indice = RicercaISBN(ISBN_Venduto);
+    indice = RicercaISBN(l, ISBN_Venduto);
 
-    if (indice == -1)
+    if (indice == -1){
         cout << "ISBN errato o inesistente!\n";
+        exit(0);
+    }
   }
 
+  acq.SetISBN_Acq(ISBN_Venduto);
+
   cout << "Inserire numero di copie vendute: ";
-  cin >> copie_vendute;
+  cin >> tmp_int;
+  l.at(indice).RiduciQuantita(tmp_int);
 
-  l.at(indice).RiduciQuantita(copie_vendute);
+  cout << "inserire il numero della tessera del cliente (0 se non tesserato): ";
+  cin >> tmp_int;
+  acq.SetTessera(tmp_int);
 
-  tmp.SetISBN_Acq(ISBN_Venduto);
-  tmp.SetTessera();
-  tmp.SetPrezzo_Acq();
-  tmp.SetData();
+  acq.SetPrezzo_Acq(l.at(indice).GetPrezzo());
 
-  a.push_back(tmp);
+  acq.SetData();
+
+  a.push_back(acq);
 
 }
-
-*/
