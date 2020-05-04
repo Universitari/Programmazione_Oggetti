@@ -20,7 +20,7 @@ void init(vector<Libro> &l) {
   float tmp_float;
   unsigned int tmp_int;
 
-  while (!input.eof()){
+  while (tmp_string != ";"){
 
     getline(input, tmp_string, ',');
       tmp_libro.SetTitolo(tmp_string);
@@ -35,8 +35,9 @@ void init(vector<Libro> &l) {
     input.ignore(1);
       tmp_libro.SetQuantita(tmp_int);
     input >> tmp_int;
-    input.ignore(1);
       tmp_libro.SetOrdinati(tmp_int);
+
+    input >> tmp_string;
 
     l.push_back(tmp_libro);
 

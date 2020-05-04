@@ -15,6 +15,10 @@ int main(){
 
 	PrintLibro(lista_libri.at(0));
 	PrintLibro(lista_libri.at(1));
+	PrintLibro(lista_libri.at(2));
+	PrintLibro(lista_libri.at(3));
+	PrintLibro(lista_libri.at(4));
+	PrintLibro(lista_libri.at(5));
 
 	/*
 	Libro prova0, prova1, prova2;
