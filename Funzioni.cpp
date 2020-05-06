@@ -5,7 +5,7 @@
 
 using namespace std;
 
-void init(vector<Libro> &l) {
+void init_l(vector<Libro> &l) {
 
   ifstream input;
 
@@ -16,7 +16,7 @@ void init(vector<Libro> &l) {
   }
 
   Libro tmp_libro;
-  string tmp_string;
+  string tmp_string = "";
   float tmp_float;
   unsigned int tmp_int;
 
@@ -45,6 +45,86 @@ void init(vector<Libro> &l) {
 
   input.close();
 };
+
+void init_a(vector<Acquisto> &a) {
+
+  ifstream input;
+
+  input.open("Acquisti.txt");
+  if (!input.good()){
+    cout << "Errore nell'apertura del file";
+    exit(0);
+  }
+
+  Acquisto tmp_acquisto;
+  string tmp_string = "";
+  unsigned int tmp_int;
+  float tmp_float;
+  Data tmp_data;
+
+  while (tmp_string != ";"){
+
+    getline(input, tmp_string, ',');
+        tmp_acquisto.SetISBN_Acq(tmp_string);
+
+    input >> tmp_int;
+        input.ignore(1);
+            tmp_acquisto.SetTessera(tmp_int);
+
+    input >> tmp_float;
+        input.ignore(1);
+            tmp_acquisto.SetPrezzo(tmp_float);
+
+    input >> tmp_data.Giorno;
+      input.ignore(1);
+
+    input >> tmp_data.Mese;
+      input.ignore(1);
+
+    input >> tmp_data.Anno;
+        tmp_acquisto.SetData(tmp_data);
+
+    input >> tmp_string;
+
+    a.push_back(tmp_acquisto);
+  };
+
+  input.close();
+};
+
+void init_c(vector<Cliente> &c){
+
+  ifstream input;
+
+  input.open("Clienti.txt");
+  if (!input.good()){
+    cout << "Errore nell'apertura del file";
+    exit(0);
+  }
+
+  Cliente tmp_cliente;
+  string tmp_string = "";
+  unsigned int tmp_int;
+
+  while (tmp_string != ";"){
+
+    getline(input, tmp_string, ',');
+      tmp_cliente.SetNome(tmp_string);
+    getline(input, tmp_string, ',');
+      tmp_cliente.SetCognome(tmp_string);
+    getline(input, tmp_string, ',');
+      tmp_cliente.SetEmail(tmp_string);
+    input >> tmp_int;
+      tmp_cliente.SetTessera_c(tmp_int);
+
+    input >> tmp_string;
+
+    c.push_back(tmp_cliente);
+
+}
+
+  input.close();
+}
 
 void Aggiunta_Libro(vector<Libro> &l){
 
@@ -99,6 +179,7 @@ void PrintLibro(const Libro tmp){
        << tmp.GetOrdinati() <<endl;
 }
 
+
 void PrintAcquisto(const Acquisto tmp){
 
   cout << tmp.GetISBN_Acq() << endl
@@ -107,6 +188,14 @@ void PrintAcquisto(const Acquisto tmp){
        << tmp.GetData().Giorno << "/"
        << tmp.GetData().Mese << "/"
        << tmp.GetData().Anno << endl;
+}
+
+void PrintCliente(const Cliente tmp){
+
+  cout << tmp.GetNome() <<endl
+       << tmp.GetCognome() <<endl
+       << tmp.GetEmail() <<endl
+       << tmp.GetTessera() <<endl;
 }
 
 int RicercaISBN(vector<Libro> &l, const string tmp){

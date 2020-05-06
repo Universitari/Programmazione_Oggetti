@@ -10,14 +10,23 @@ int main(){
 
 	vector<Libro> lista_libri;
 	vector<Acquisto> lista_acquisti;
+	vector<Cliente> lista_clienti;
 
-	init(lista_libri);
-
-	Vendita(lista_libri, lista_acquisti);
-
-	PrintAcquisto(lista_acquisti.at(0));
+	init_l(lista_libri);
+	init_a(lista_acquisti);
+	init_c(lista_clienti);
 
 	PrintLibro(lista_libri.at(3));
+
+	PrintCliente(lista_clienti.at(0));
+	PrintCliente(lista_clienti.at(1));
+
+	PrintAcquisto(lista_acquisti.at(0));
+	PrintAcquisto(lista_acquisti.at(1));
+	PrintAcquisto(lista_acquisti.at(2));
+
+
+
 
 	/*
 	Libro prova0, prova1, prova2;
