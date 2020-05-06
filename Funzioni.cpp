@@ -179,7 +179,6 @@ void PrintLibro(const Libro tmp){
        << tmp.GetOrdinati() <<endl;
 }
 
-
 void PrintAcquisto(const Acquisto tmp){
 
   cout << tmp.GetISBN_Acq() << endl
@@ -235,10 +234,19 @@ void Vendita(vector<Libro> &l, vector<Acquisto> &a){
     }
   }
 
-  acq.SetISBN_Acq(ISBN_Venduto);
+
 
   cout << "Inserire numero di copie vendute: ";
   cin >> tmp_int;
+
+  if (tmp_int > l.at(indice).GetQuantita()){
+    cout << "Sono disponibili solo " << l.at(indice).GetQuantita()
+         << " copie di quel libro.";
+    exit(0);
+  };
+
+  acq.SetISBN_Acq(ISBN_Venduto);
+
   l.at(indice).RiduciQuantita(tmp_int);
 
   cout << "inserire il numero della tessera del cliente (0 se non tesserato): ";

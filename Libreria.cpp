@@ -16,16 +16,7 @@ int main(){
 	init_a(lista_acquisti);
 	init_c(lista_clienti);
 
-	PrintLibro(lista_libri.at(3));
-
-	PrintCliente(lista_clienti.at(0));
-	PrintCliente(lista_clienti.at(1));
-
-	PrintAcquisto(lista_acquisti.at(0));
-	PrintAcquisto(lista_acquisti.at(1));
-	PrintAcquisto(lista_acquisti.at(2));
-
-
+	Vendita(lista_libri, lista_acquisti);
 
 
 	/*
