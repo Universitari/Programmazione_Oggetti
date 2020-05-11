@@ -16,7 +16,12 @@ int main(){
 	init_a(lista_acquisti);
 	init_c(lista_clienti);
 
-	Vendita(lista_libri, lista_acquisti);
+	Aggiunta_Clienti(lista_clienti);
+
+	PrintCliente(lista_clienti.at(0));
+	PrintCliente(lista_clienti.at(1));
+	PrintCliente(lista_clienti.at(2));
+	PrintCliente(lista_clienti.at(3));
 
 
 	/*

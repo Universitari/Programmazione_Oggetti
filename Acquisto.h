@@ -4,9 +4,9 @@ using namespace std;
 
 struct Data {
 
-    short int Giorno;
-    short int Mese;
-    short int Anno;
+    short int Giorno = 1;
+    short int Mese = 1;
+    short int Anno = 1900;
 };
 
 class Acquisto {

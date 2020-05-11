@@ -1,2 +1,2 @@
-Armando,Cortellessa,acortellessa@hotmail.it,1,
-Paolo,Simeone,emailpaolo@gmail.com,2 ;
+Armando,Cortellessa,acortellessa@hotmail.it,AC061100 ,
+Paolo,Simeone,emailpaolo@gmail.com,PS131001 ;
