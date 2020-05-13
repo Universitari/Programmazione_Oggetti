@@ -373,11 +373,25 @@ void EliminaCliente(vector<Cliente> &c){
 
     int indice;
     unsigned int tessera;
+    bool flag;
 
-    cout << "Inserire l'ID della tessera del cliente da eliminare: ";
-    cin >> tessera;
+    do {
+
+      cout << "Inserire l'ID della tessera del cliente da eliminare: ";
+      cin >> tessera;
+
+      if (tessera < c.front().GetTessera() || tessera > c.back().GetTessera()){
+        cout << "Errore! ID tessera non esistente!\n";
+        flag = true;
+      } else flag = false;
+
+    } while (flag);
 
     indice = RicercaTessera(c, tessera);
+    if (indice == -1){
+        cout << "Errore!ID tessera non esistente\n";
+        exit(0);
+    };
 
     c.erase(c.begin()+indice);
 
@@ -385,15 +399,22 @@ void EliminaCliente(vector<Cliente> &c){
 
 int RicercaTessera(vector<Cliente> &c, unsigned int tessera){
 
-    int i = c.size() / 2;
+    int min = 0;
+    int max = c.size() - 1;
+    int mid;
 
-    while (tessera != c.at(i).GetTessera()){
+    while (min <= max){
 
-        if (c.at(i).GetTessera() < tessera)
-            i = (c.size() + i) / 2;
-        else i = i / 2;
+        mid = (min + max) / 2;
+
+        if (c.at(mid).GetTessera() == tessera)
+            return mid;
+
+        if (c.at(mid).GetTessera() < tessera)
+            min = mid + 1;
+        else max = mid -1;
 
     }
 
-    return i;
+    return -1;
 }
