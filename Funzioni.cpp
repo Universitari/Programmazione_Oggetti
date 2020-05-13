@@ -106,6 +106,9 @@ void init_c(vector<Cliente> &c){
   string tmp_string = "";
   unsigned int tmp_int;
 
+  input >> tmp_int;
+  tmp_cliente.SetID(tmp_int);
+
   while (tmp_string != ";"){
 
     getline(input, tmp_string, ',');
@@ -114,8 +117,8 @@ void init_c(vector<Cliente> &c){
       tmp_cliente.SetCognome(tmp_string);
     getline(input, tmp_string, ',');
       tmp_cliente.SetEmail(tmp_string);
-    input >> tmp_string;
-      tmp_cliente.SetTessera_c(tmp_string);
+    input >> tmp_int;
+      tmp_cliente.SetTessera(tmp_int);
 
     input >> tmp_string;
 
@@ -124,6 +127,7 @@ void init_c(vector<Cliente> &c){
 }
 
   input.close();
+
 }
 
 void Aggiunta_Libro(vector<Libro> &l){
@@ -341,9 +345,7 @@ return tmp;
 void Aggiunta_Clienti(vector<Cliente> &c){
 
     string tmp_string;
-    string codice;
     Cliente tmp_cliente;
-    static int n=0;
 
     cout << "AGGIUNTA CLIENTE\n";
 
@@ -352,30 +354,16 @@ void Aggiunta_Clienti(vector<Cliente> &c){
         tmp_cliente.SetNome(tmp_string);
     cin.clear();
 
-    codice.push_back(tmp_string.front());
-
     cout << "Cognome: ";
     getline(cin, tmp_string);
         tmp_cliente.SetCognome(tmp_string);
-
-    codice.push_back(tmp_string.front());
 
     cout << "e-mail: ";
     getline(cin, tmp_string);
         tmp_cliente.SetEmail(tmp_string);
 
-    cout << "Giorno: ";
-    getline(cin, tmp_string);
-        codice.append(tmp_string);
-
-    cout << "Mese: ";
-    getline(cin, tmp_string);
-        codice.append(tmp_string);
-
-    codice.append(to_string(n++));
-    //non va bene
-
-    tmp_cliente.SetTessera_c(codice);
+    tmp_cliente.SetTessera(tmp_cliente.GetID()+1);
+    tmp_cliente.SetID(tmp_cliente.GetID()+1);
 
     c.push_back(tmp_cliente);
 

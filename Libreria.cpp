@@ -17,6 +17,7 @@ int main(){
 	init_c(lista_clienti);
 
 	Aggiunta_Clienti(lista_clienti);
+	Aggiunta_Clienti(lista_clienti);
 
 	PrintCliente(lista_clienti.at(0));
 	PrintCliente(lista_clienti.at(1));
