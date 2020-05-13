@@ -23,5 +23,5 @@ short int MaxGiorno(short int m, short int y);
 Data InserimentoData();
 
 void Aggiunta_Clienti(vector<Cliente> &c);
+int RicercaTessera(vector<Cliente> &c, unsigned int tessera);
 void EliminaCliente(vector<Cliente> &c);
-int Ricerca_id(vector<Cliente> &c, unsigned int tessera);
