@@ -368,3 +368,32 @@ void Aggiunta_Clienti(vector<Cliente> &c){
     c.push_back(tmp_cliente);
 
 }
+
+void EliminaCliente(vector<Cliente> &c){
+
+    int indice;
+    unsigned int tessera;
+
+    cout << "Inserire l'ID della tessera del cliente da eliminare: ";
+    cin >> tessera;
+
+    indice = RicercaTessera(c, tessera);
+
+    c.erase(c.begin()+indice);
+
+}
+
+int RicercaTessera(vector<Cliente> &c, unsigned int tessera){
+
+    int i = c.size() / 2;
+
+    while (tessera != c.at(i).GetTessera()){
+
+        if (c.at(i).GetTessera() < tessera)
+            i = (c.size() + i) / 2;
+        else i = i / 2;
+
+    }
+
+    return i;
+}
