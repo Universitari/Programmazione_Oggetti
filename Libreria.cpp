@@ -16,8 +16,9 @@ int main(){
 	init_a(lista_acquisti);
 	init_c(lista_clienti);
 
-	Aggiunta_Libro(lista_libri);
-	Aggiunta_Libro(lista_libri);
+	Vendita(lista_libri, lista_acquisti);
+	save_a(lista_acquisti);
+	save_c(lista_clienti);
 	save_l(lista_libri);
 
 	return 0;

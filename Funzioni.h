@@ -27,3 +27,5 @@ int RicercaTessera(vector<Cliente> &c, unsigned int tessera);
 void EliminaCliente(vector<Cliente> &c);
 
 void save_l(vector<Libro> &l);
+void save_a(vector<Acquisto> &a);
+  void save_c(vector<Cliente> &c);

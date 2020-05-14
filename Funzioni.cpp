@@ -13,7 +13,7 @@ void init_l(vector<Libro> &l) {
   if (!input.good()){
     cout << "Errore nell'apertura del file";
     exit(0);
-  }
+  };
 
   Libro tmp_libro;
   string tmp_string = "";
@@ -38,6 +38,7 @@ void init_l(vector<Libro> &l) {
       tmp_libro.SetOrdinati(tmp_int);
 
     input >> tmp_string;
+    input.ignore();
 
     l.push_back(tmp_libro);
 
@@ -86,6 +87,8 @@ void init_a(vector<Acquisto> &a) {
 
     input >> tmp_string;
 
+    input.ignore();
+
     a.push_back(tmp_acquisto);
   };
 
@@ -121,6 +124,8 @@ void init_c(vector<Cliente> &c){
       tmp_cliente.SetTessera(tmp_int);
 
     input >> tmp_string;
+
+    input.ignore();
 
     c.push_back(tmp_cliente);
 
@@ -425,7 +430,7 @@ void save_l(vector<Libro> &l){
 
     ofstream output;
 
-    output.open("Libri.txt", ofstream::out | ofstream::trunc);
+    output.open("Libri.txt");
 
     if (!output.good()){
 
@@ -436,16 +441,78 @@ void save_l(vector<Libro> &l){
     int i;
 
     for (i=0; i < l.size(); i++){
-
         output << l.at(i).GetTitolo() << ","
                << l.at(i).GetAutore() << ","
                << l.at(i).GetISBN() << ","
                << l.at(i).GetPrezzo() << ","
                << l.at(i).GetQuantita() << ","
-               << l.at(i).GetOrdinati() << ",\n";
+               << l.at(i).GetOrdinati();
 
+        if (i == l.size() - 1)
+          output << " ;";
+        else output << ",\n";
 
     }
 
     output.close();
+}
+
+void save_a(vector<Acquisto> &a){
+
+  ofstream output;
+
+  output.open("Acquisti.txt");
+
+  if (!output.good()){
+
+      cout << "Errore nell'apertura del file di output!\n";
+      exit(0);
+  };
+
+  int i;
+
+  for (i=0; i < a.size(); i++){
+
+      output << a.at(i).GetISBN_Acq() << ","
+             << a.at(i).GetNumero_tessera() << ","
+             << a.at(i).GetPrezzo_Acq() << ","
+             << a.at(i).GetData().Giorno << "/"
+             << a.at(i).GetData().Mese << "/"
+             << a.at(i).GetData().Anno;
+
+      if (i == a.size() - 1)
+        output << " ;";
+      else output << ",\n";
+  }
+
+}
+
+void save_c(vector<Cliente> &c){
+
+    ofstream output;
+
+    output.open("Clienti.txt");
+
+    if (!output.good()){
+
+        cout << "Errore nell'apertura del file di output!\n";
+        exit(0);
+    };
+
+    int i;
+
+    output << c.at(0).GetID() << " ";
+
+    for (i=0; i < c.size(); i++){
+
+        output << c.at(i).GetNome() << ","
+               << c.at(i).GetCognome() << ","
+               << c.at(i).GetEmail() << ","
+               << c.at(i).GetTessera();
+
+        if (i == c.size() - 1)
+          output << " ;";
+        else output << ",\n";
+    }
+
 }
