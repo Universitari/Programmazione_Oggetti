@@ -1,5 +1,5 @@
-La fattoria degli animali,George Orwell,978-88-04-66792-6,12.00,3,0,
-1984,George Orwell,978-88-04-66823-7,14.00,2,1,
-Le avventure del barone di Munchhausen,Rudolf Erich Raspe,978-88-17-05054-8,7.90,4,3,
-Il ritratto di Dorian Gray,Oscar Wilde,978-88-09-77288-5,8.00,1,2,
-L'impero nel caos,Anthony Reynolds,978-88-04-58987-7,9.00,2,0 ;
+La fattoria degli animali,George Orwell,978-88-04-66792-6,12,3,0,
+1984,George Orwell,978-88-04-66823-7,14,2,1,
+Le avventure del barone di Munchhausen,Rudolf Erich Raspe,978-88-17-05054-8,7.9,4,3,
+Il ritratto di Dorian Gray,Oscar Wilde,978-88-09-77288-5,8,1,2,
+L'impero nel caos,Anthony Reynolds,978-88-04-58987-7,9,2,0 ;

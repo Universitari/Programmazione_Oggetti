@@ -25,3 +25,5 @@ Data InserimentoData();
 void Aggiunta_Clienti(vector<Cliente> &c);
 int RicercaTessera(vector<Cliente> &c, unsigned int tessera);
 void EliminaCliente(vector<Cliente> &c);
+
+void save_l(vector<Libro> &l);

@@ -140,15 +140,15 @@ void Aggiunta_Libro(vector<Libro> &l){
   cout << "AGGIUNTA LIBRO\n";
 
     cout << "Titolo: ";
-    cin >> tmp_string;
+    getline(cin, tmp_string);
       tmp_libro.SetTitolo(tmp_string);
 
     cout << "Autore: ";
-    cin >> tmp_string;
+    getline(cin, tmp_string);
       tmp_libro.SetAutore(tmp_string);
 
     cout << "ISBN: ";
-    cin >> tmp_string;
+    getline(cin, tmp_string);
 
     if (RicercaISBN(l, tmp_string) != -1){
       cout << "Errore, ISBN già presente.";
@@ -168,6 +168,8 @@ void Aggiunta_Libro(vector<Libro> &l){
     cout << "Ordinati: ";
     cin >> tmp_int;
       tmp_libro.SetOrdinati(tmp_int);
+
+    cin.ignore();
 
     l.push_back(tmp_libro);
 
@@ -417,4 +419,33 @@ int RicercaTessera(vector<Cliente> &c, unsigned int tessera){
     }
 
     return -1;
+}
+
+void save_l(vector<Libro> &l){
+
+    ofstream output;
+
+    output.open("Libri.txt", ofstream::out | ofstream::trunc);
+
+    if (!output.good()){
+
+        cout << "Errore nell'apertura del file di output!\n";
+        exit(0);
+    };
+
+    int i;
+
+    for (i=0; i < l.size(); i++){
+
+        output << l.at(i).GetTitolo() << ","
+               << l.at(i).GetAutore() << ","
+               << l.at(i).GetISBN() << ","
+               << l.at(i).GetPrezzo() << ","
+               << l.at(i).GetQuantita() << ","
+               << l.at(i).GetOrdinati() << ",\n";
+
+
+    }
+
+    output.close();
 }
