@@ -227,6 +227,7 @@ void Vendita(vector<Libro> &l, vector<Acquisto> &a){
   string ISBN_Venduto;
   int indice = -1;
   int tmp_int;
+  unsigned int tmp_tessera;
   float tmp_float;
   Acquisto acq;
   Data tmp_data;
@@ -245,8 +246,6 @@ void Vendita(vector<Libro> &l, vector<Acquisto> &a){
     }
   }
 
-
-
   cout << "Inserire numero di copie vendute: ";
   cin >> tmp_int;
 
@@ -261,10 +260,10 @@ void Vendita(vector<Libro> &l, vector<Acquisto> &a){
   l.at(indice).RiduciQuantita(tmp_int);
 
   cout << "inserire il numero della tessera del cliente (0 se non tesserato): ";
-  cin >> tmp_int;
-  acq.SetTessera(tmp_int);
+  cin >> tmp_tessera;
+  acq.SetTessera(tmp_tessera);
 
-  acq.SetPrezzo_Acq(l.at(indice).GetPrezzo());
+  acq.SetPrezzo_Acq(l.at(indice).GetPrezzo() * tmp_int);
 
   tmp_data = InserimentoData();
   acq.SetData(tmp_data);
@@ -349,7 +348,7 @@ return tmp;
 
 }
 
-void Aggiunta_Clienti(vector<Cliente> &c){
+void Aggiunta_Cliente(vector<Cliente> &c){
 
     string tmp_string;
     Cliente tmp_cliente;
@@ -514,5 +513,47 @@ void save_c(vector<Cliente> &c){
           output << " ;";
         else output << ",\n";
     }
+
+}
+
+void OrdinaLibri(vector<Libro> &l){
+
+    string tmp_string;
+    int i;
+    unsigned int quantita=0;
+
+    cout << "Inserire l'ISBN del libro ordinato: ";
+    cin >> tmp_string;
+
+    i = RicercaISBN(l, tmp_string);
+
+    cout << "inserire la quantità di libri ordinati: ";
+    cin >> quantita;
+
+    l.at(i).SetOrdinati(quantita);
+
+}
+
+void LibriArrivati(vector<Libro> &l){
+
+    string tmp_string;
+    int i;
+    unsigned int quantita=0;
+
+    cout << "Inserire l'ISBN del libro arrivati: ";
+    cin >> tmp_string;
+
+    i = RicercaISBN(l, tmp_string);
+
+    cout << "inserire la quantità di libri arrivati: ";
+    cin >> quantita;
+
+    if (quantita > l.at(i).GetOrdinati()){
+        cout << "Errore! i libri ordinati sono " << l.at(i).GetOrdinati() << endl;
+        return;
+    }
+
+    l.at(i).SetOrdinati(l.at(i).GetOrdinati() - quantita);
+    l.at(i).SetQuantita(l.at(i).GetQuantita() + quantita);
 
 }

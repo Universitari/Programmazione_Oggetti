@@ -22,10 +22,13 @@ void Vendita(vector<Libro> &l, vector<Acquisto> &a);
 short int MaxGiorno(short int m, short int y);
 Data InserimentoData();
 
-void Aggiunta_Clienti(vector<Cliente> &c);
+void Aggiunta_Cliente(vector<Cliente> &c);
 int RicercaTessera(vector<Cliente> &c, unsigned int tessera);
 void EliminaCliente(vector<Cliente> &c);
 
 void save_l(vector<Libro> &l);
 void save_a(vector<Acquisto> &a);
-  void save_c(vector<Cliente> &c);
+void save_c(vector<Cliente> &c);
+
+void OrdinaLibri(vector<Libro> &l);
+void LibriArrivati(vector<Libro> &l);

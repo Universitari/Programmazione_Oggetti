@@ -2,7 +2,6 @@
 #include <string>
 #include <vector>
 #include "Menu.h"
-#include "Funzioni.h"
 
 using namespace std;
 
@@ -16,10 +15,7 @@ int main(){
 	init_a(lista_acquisti);
 	init_c(lista_clienti);
 
-	Vendita(lista_libri, lista_acquisti);
-	save_a(lista_acquisti);
-	save_c(lista_clienti);
-	save_l(lista_libri);
+	Menu_Principale(lista_libri, lista_clienti, lista_acquisti);
 
 	return 0;
 }
