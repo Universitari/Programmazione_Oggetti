@@ -633,6 +633,19 @@ void LibriArrivati(vector<Libro> &l){
 
 }
 
+string Data_to_string(Acquisto a){
+
+  string tmp_string;
+
+  tmp_string = to_string(a.GetData().Giorno);
+  tmp_string += "/";
+  tmp_string += to_string(a.GetData().Mese);
+  tmp_string += "/";
+  tmp_string += to_string(a.GetData().Anno);
+
+  return tmp_string;
+}
+
 int Input_int(){
 
   int x;
@@ -678,5 +691,103 @@ float Input_float(){
 bool File_Vuoto(ifstream& input){
 
     return input.peek() == ifstream::traits_type::eof();
+
+}
+
+void StampaLibri(const vector<Libro> &l){
+
+  int i;
+
+  rlutil::setColor(3);
+
+  cout << left << setw(49) << setfill(' ') << "Titolo, Autore"
+       << left << setw(20) << setfill(' ') << "ISBN"
+       << left << setw(8) << setfill(' ') << "Prezzo"
+       << left << setw(10) << setfill(' ') << "Q. stock"
+       << left << setw(11) << setfill(' ') << "Q. ordinata"
+       << endl;
+
+  for (i = 0; i < l.size(); i++ ){
+
+    if (i%2 == 1){
+      rlutil::setBackgroundColor(7);
+      rlutil::setColor(0);
+    } else rlutil::resetColor();
+
+
+    cout << left << setw(49) << setfill(' ') << l.at(i).GetTitolo()
+         << left << setw(20) << setfill(' ') << l.at(i).GetISBN()
+         << left << setw(8) << setfill(' ') << l.at(i).GetPrezzo()
+         << left << setw(10) << setfill(' ') << l.at(i).GetQuantita()
+         << left << setw(11) << setfill(' ') << l.at(i).GetOrdinati()
+         << endl << setw(98) << setfill(' ') << l.at(i).GetAutore()
+         << endl;
+  }
+
+  rlutil::resetColor();
+
+}
+
+void StampaAcquisti(const vector<Acquisto> &a){
+
+  int i;
+
+  rlutil::setColor(3);
+
+  cout << left << setw(20) << setfill(' ') << "ISBN"
+       << left << setw(10) << setfill(' ') << "Tessera"
+       << left << setw(8) << setfill(' ') << "Prezzo"
+       << left << setw(12) << setfill(' ') << "Data"
+       << endl;
+
+  for (i = 0; i < a.size(); i++ ){
+
+    if (i%2 == 1){
+      rlutil::setBackgroundColor(7);
+      rlutil::setColor(0);
+    } else rlutil::resetColor();
+
+
+    cout << left << setw(20) << setfill(' ') << a.at(i).GetISBN_Acq()
+         << left << setw(10) << setfill(' ') << a.at(i).GetNumero_tessera()
+         << left << setw(8) << setfill(' ') << a.at(i).GetPrezzo_Acq()
+         << left << setw(12) << setfill(' ') << Data_to_string(a.at(i))
+         << endl;
+
+  }
+
+  rlutil::resetColor();
+
+}
+
+void StampaClienti(const vector<Cliente> &c){
+
+  int i;
+
+  rlutil::setColor(3);
+
+  cout << left << setw(20) << setfill(' ') << "Nome"
+       << left << setw(30) << setfill(' ') << "Cognome"
+       << left << setw(35) << setfill(' ') << "Email"
+       << left << setw(10) << setfill(' ') << "Tessera"
+       << endl;
+
+  for (i = 0; i < c.size(); i++ ){
+
+    if (i%2 == 1){
+      rlutil::setBackgroundColor(7);
+      rlutil::setColor(0);
+    } else rlutil::resetColor();
+
+
+    cout << left << setw(20) << setfill(' ') << c.at(i).GetNome()
+         << left << setw(30) << setfill(' ') << c.at(i).GetCognome()
+         << left << setw(35) << setfill(' ') << c.at(i).GetEmail()
+         << left << setw(10) << setfill(' ') << c.at(i).GetTessera()
+         << endl;
+
+  }
+
+  rlutil::resetColor();
 
 }

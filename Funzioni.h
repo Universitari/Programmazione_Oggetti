@@ -1,6 +1,7 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <iomanip>
 #include "Libro.h"
 #include "Acquisto.h"
 #include "Cliente.h"
@@ -26,11 +27,16 @@ void PrintLibro(const Libro tmp);
 void PrintAcquisto(const Acquisto tmp);
 void PrintCliente(const Cliente tmp);
 
+void StampaLibri(const vector<Libro> &l);
+void StampaAcquisti(const vector<Acquisto> &a);
+void StampaClienti(const vector<Cliente> &c);
+
 int RicercaISBN(vector<Libro> &l, const string tmp);
 int RicercaTessera(vector<Cliente> &c, unsigned int tessera);
 void Vendita(vector<Libro> &l, vector<Acquisto> &a);
 void OrdinaLibri(vector<Libro> &l);
 void LibriArrivati(vector<Libro> &l);
+string Data_to_string(Acquisto a);
 
 short int MaxGiorno(short int m, short int y);
 Data InserimentoData();

@@ -186,8 +186,8 @@ void Menu_Stampa(vector<Libro> &l, vector<Acquisto> &a, vector<Cliente> &c){
 
 	rlutil::resetColor();
 	cout << "1. Stampa lista libri\n"
-	        "2. Stampa lista clienti\n"
-	        "3. Stampa lista acquisti\n"
+				  "2. Stampa lista acquisti\n"
+	        "3. Stampa lista clienti\n"
 					"0. Indietro\n"
 					"Inserisci un numero... ";
 
@@ -197,15 +197,30 @@ scelta = Inserimento_Scelta(3);
 
 	    case(1):
 
+				rlutil::cls();
+				StampaLibri(l);
+
+				cout << "\nPremi qualsiasi tasto per tornare al menu...";
+				rlutil::anykey();
 				break;
 
 	    case(2):
 
+				rlutil::cls();
+				StampaAcquisti(a);
+
+				cout << "\nPremi qualsiasi tasto per tornare al menu...";
+				rlutil::anykey();
 				break;
 
 	    case(3):
 
-				break;
+			rlutil::cls();
+			StampaClienti(c);
+
+			cout << "\nPremi qualsiasi tasto per tornare al menu...";
+			rlutil::anykey();
+			break;
 
 			default:
 				return;
