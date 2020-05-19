@@ -15,7 +15,7 @@ int main(){
 	init_a(lista_acquisti);
 	init_c(lista_clienti);
 
-	Menu_Principale(lista_libri, lista_clienti, lista_acquisti);
+	Menu_Principale(lista_libri, lista_acquisti, lista_clienti);
 
 	return 0;
 }
