@@ -19,12 +19,12 @@ class Cliente {
   void SetCognome(string tmp) {Cognome = tmp;};
   void SetEmail(string tmp) {Email = tmp;};
   void SetTessera(unsigned int tmp) {Tessera = tmp;};
-  void SetID(unsigned int tmp) {max_clienti = tmp;};
+  void Set_MaxClienti(unsigned int tmp) {max_clienti = tmp;};
 
   string GetNome() const {return Nome;};
   string GetCognome() const {return Cognome;};
   string GetEmail() const {return Email;};
   unsigned int GetTessera() const {return Tessera;};
-  unsigned int GetID() const {return max_clienti;};
+  unsigned int Get_MaxClienti() const {return max_clienti;};
 
 };

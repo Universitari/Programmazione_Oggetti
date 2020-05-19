@@ -15,7 +15,7 @@ void Menu_Principale(vector<Libro> &l, vector<Acquisto> &a, vector<Cliente> &c) 
 	cout << "MENU PRINCIPALE\n";
 
 	rlutil::resetColor();
-	cout <<	"1. Ricerca libri\n"
+	cout <<	"1. Ricerca libro\n"
 					"2. Gestisci dati\n"
 					"3. Visualizza dati\n"
 					"4. Salva\n"
@@ -42,9 +42,13 @@ void Menu_Principale(vector<Libro> &l, vector<Acquisto> &a, vector<Cliente> &c) 
 					cout << "ISBN non presente!\n"
 									"Premi qualsiasi tasto per tornare al menu...";
 					rlutil::anykey();
-				} else
+				} else{
+
 					PrintLibro(l.at(i));
+					cout << "Premi qualsiasi tasto per tornare al menu...";
 					rlutil::anykey();
+					}
+
 				break;
 		}
 
@@ -214,14 +218,15 @@ unsigned int Inserimento_Scelta(int max){
 
 	do{
 
-		cin >> scelta;
-		cin.ignore();
+		scelta = Input_int();
 
 		if (scelta <= max)
 			return scelta;
 
-		cout << "Numero non valido.\n"
-						"Inserisci un numero... ";
+		rlutil::setColor(4);
+		cout << "Numero non valido. ";
+		rlutil::resetColor();
+		cout <<	"Inserisci un numero... ";
 
 	} while (true);
 

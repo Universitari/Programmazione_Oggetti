@@ -15,6 +15,11 @@ void init_l(vector<Libro> &l) {
     exit(0);
   };
 
+  if (File_Vuoto(input)){
+    input.close();
+    return;
+  }
+
   Libro tmp_libro;
   string tmp_string = "";
   float tmp_float;
@@ -55,6 +60,11 @@ void init_a(vector<Acquisto> &a) {
   if (!input.good()){
     cout << "Errore nell'apertura del file";
     exit(0);
+  }
+
+  if (File_Vuoto(input)){
+    input.close();
+    return;
   }
 
   Acquisto tmp_acquisto;
@@ -105,12 +115,18 @@ void init_c(vector<Cliente> &c){
     exit(0);
   }
 
+  if (File_Vuoto(input)){
+    input.close();
+    return;
+  }
+
   Cliente tmp_cliente;
   string tmp_string = "";
   unsigned int tmp_int;
 
   input >> tmp_int;
-  tmp_cliente.SetID(tmp_int);
+  input.ignore(1);
+  tmp_cliente.Set_MaxClienti(tmp_int);
 
   while (tmp_string != ";"){
 
@@ -162,19 +178,17 @@ void Aggiunta_Libro(vector<Libro> &l){
 
     tmp_libro.SetISBN(tmp_string);
 
-      cout << "Prezzo: ";
-    cin >> tmp_float;
+    cout << "Prezzo: ";
+    tmp_float = Input_float();
       tmp_libro.SetPrezzo(tmp_float);
 
     cout << "Quantita in stock: ";
-    cin >> tmp_int;
+    tmp_int = Input_int();
       tmp_libro.SetQuantita(tmp_int);
 
     cout << "Ordinati: ";
-    cin >> tmp_int;
+    tmp_int = Input_int();
       tmp_libro.SetOrdinati(tmp_int);
-
-    cin.ignore();
 
     l.push_back(tmp_libro);
 
@@ -247,7 +261,7 @@ void Vendita(vector<Libro> &l, vector<Acquisto> &a){
     }
 
   cout << "Inserire numero di copie vendute: ";
-  cin >> tmp_int;
+  tmp_int = Input_int();
 
   if (tmp_int > l.at(indice).GetQuantita()){
     cout << "Sono disponibili solo " << l.at(indice).GetQuantita()
@@ -260,7 +274,7 @@ void Vendita(vector<Libro> &l, vector<Acquisto> &a){
   l.at(indice).RiduciQuantita(tmp_int);
 
   cout << "inserire il numero della tessera del cliente (0 se non tesserato): ";
-  cin >> tmp_tessera;
+  tmp_tessera = Input_int();
   acq.SetTessera(tmp_tessera);
 
   acq.SetPrezzo_Acq(l.at(indice).GetPrezzo() * tmp_int);
@@ -313,13 +327,13 @@ Data InserimentoData(){
 
   do {
   cout << "Giorno: ";
-  cin >> d;
+  d = Input_int();
 
   cout << "Mese: ";
-  cin >> m;
+  m = Input_int();
 
   cout << "Anno: ";
-  cin >> y;
+  y = Input_int();
 
   if (y < 1900){
     cout << "Anno non valido. Reinserire la data.\n";
@@ -368,8 +382,8 @@ void Aggiunta_Cliente(vector<Cliente> &c){
     getline(cin, tmp_string);
         tmp_cliente.SetEmail(tmp_string);
 
-    tmp_cliente.SetTessera(tmp_cliente.GetID()+1);
-    tmp_cliente.SetID(tmp_cliente.GetID()+1);
+    tmp_cliente.SetTessera(tmp_cliente.Get_MaxClienti()+1);
+    tmp_cliente.Set_MaxClienti(tmp_cliente.Get_MaxClienti()+1);
 
     c.push_back(tmp_cliente);
 
@@ -380,26 +394,41 @@ void EliminaCliente(vector<Cliente> &c){
     int indice;
     unsigned int tessera;
 
-      cout << "Inserire l'ID della tessera del cliente da eliminare: ";
-      cin >> tessera;
-      cin.ignore();
+      cout << "Inserire l'ID della tessera del cliente da eliminare... ";
+      tessera = Input_int();
 
       if (tessera < c.front().GetTessera() || tessera > c.back().GetTessera()){
-        cout << "Errore! ID tessera non esistente!\n"
-             << "Premi qualsiasi tasto per tornare al menu...";
+
+        rlutil::setColor(4);
+        cout << "Errore! ID tessera non esistente!\n";
+
+        rlutil::resetColor();
+        cout << "Premi qualsiasi tasto per tornare al menu...";
+
         rlutil::anykey();
         return;
       }
 
     indice = RicercaTessera(c, tessera);
     if (indice == -1){
-      cout << "Errore! ID tessera non esistente!\n"
-           << "Premi qualsiasi tasto per tornare al menu...";
+
+      rlutil::setColor(4);
+      cout << "Errore! ID tessera non esistente!\n";
+
+      rlutil::resetColor();
+      cout << "Premi qualsiasi tasto per tornare al menu...";
+
       rlutil::anykey();
       return;
     };
 
     c.erase(c.begin()+indice);
+
+    rlutil::setColor(2);
+    cout << "Eliminazione avvenuta con successo.\n";
+    rlutil::resetColor();
+    cout << "Premi qualsiasi tasto per tornare al menu...";
+    rlutil::anykey();
 
 }
 
@@ -433,8 +462,10 @@ void save_l(vector<Libro> &l){
 
     if (!output.good()){
 
-        cout << "Errore nell'apertura del file di output!\n";
-        exit(0);
+      rlutil::setColor(4);
+      cout << "Errore nell'apertura del file di output!\n";
+      rlutil::resetColor();
+      exit(0);
     };
 
     int i;
@@ -464,7 +495,9 @@ void save_a(vector<Acquisto> &a){
 
   if (!output.good()){
 
-      cout << "Errore nell'apertura del file di output!\n";
+    rlutil::setColor(4);
+    cout << "Errore nell'apertura del file di output!\n";
+    rlutil::resetColor();
       exit(0);
   };
 
@@ -493,14 +526,15 @@ void save_c(vector<Cliente> &c){
     output.open("Clienti.txt");
 
     if (!output.good()){
-
+        rlutil::setColor(4);
         cout << "Errore nell'apertura del file di output!\n";
+        rlutil::resetColor();
         exit(0);
     };
 
     int i;
 
-    output << c.at(0).GetID() << " ";
+    output << c.at(0).Get_MaxClienti() << ",";
 
     for (i=0; i < c.size(); i++){
 
@@ -523,12 +557,12 @@ void OrdinaLibri(vector<Libro> &l){
     unsigned int quantita=0;
 
     cout << "Inserire l'ISBN del libro ordinato: ";
-    cin >> tmp_string;
+    getline(cin, tmp_string);
 
     i = RicercaISBN(l, tmp_string);
 
     cout << "inserire la quantità di libri ordinati: ";
-    cin >> quantita;
+    quantita = Input_int();
 
     l.at(i).SetOrdinati(quantita);
 
@@ -553,14 +587,70 @@ void LibriArrivati(vector<Libro> &l){
     }
 
     cout << "inserire la quantità di libri arrivati: ";
-    cin >> quantita;
+    quantita = Input_int();
 
     if (quantita > l.at(i).GetOrdinati()){
-        cout << "Errore! i libri ordinati sono " << l.at(i).GetOrdinati() << endl;
-        return;
+
+      rlutil::setColor(4);
+      cout << "Errore! Sono state ordinate solo " << l.at(i).GetOrdinati()
+           << " copie di quel libro\n";
+
+      rlutil::resetColor();
+      cout << "Premi qualsiasi tasto per tornare al menu...";
+      rlutil::anykey();
+
+      return;
     }
 
     l.at(i).SetOrdinati(l.at(i).GetOrdinati() - quantita);
     l.at(i).SetQuantita(l.at(i).GetQuantita() + quantita);
+
+}
+
+int Input_int(){
+
+  int x;
+
+  while (!(cin >> x)){
+
+    rlutil::setColor(4);
+    cout << "Input non valido. ";
+
+    rlutil::resetColor();
+    cout << "Inserisci un valore intero... ";
+
+    cin.clear();
+    cin.ignore(256, '\n');
+  }
+
+  cin.ignore();
+  return x;
+
+}
+
+float Input_float(){
+
+  float x;
+
+  while (!(cin >> x)){
+
+    rlutil::setColor(4);
+    cout << "Input non valido. ";
+
+    rlutil::resetColor();
+    cout << "Inserisci un valore numerico... ";
+
+    cin.clear();
+    cin.ignore(256, '\n');
+  }
+
+  cin.ignore();
+  return x;
+
+}
+
+bool File_Vuoto(ifstream& input){
+
+    return input.peek() == ifstream::traits_type::eof();
 
 }

@@ -9,9 +9,14 @@
 
 using namespace std;
 
+int Input_int();
+float Input_float();
+bool File_Vuoto(ifstream& input);
+
 void init_l(vector<Libro> &l);
 void init_a(vector<Acquisto> &a);
 void init_c(vector<Cliente> &c);
+
 
 void Aggiunta_Libro(vector<Libro> &l);
 void Aggiunta_Cliente(vector<Cliente> &c);
