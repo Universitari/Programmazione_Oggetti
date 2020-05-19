@@ -157,7 +157,7 @@ void Aggiunta_Libro(vector<Libro> &l){
 
     if (RicercaISBN(l, tmp_string) != -1){
       cout << "Errore, ISBN già presente.";
-      exit(0);
+      return;
     }
 
     tmp_libro.SetISBN(tmp_string);
@@ -232,19 +232,19 @@ void Vendita(vector<Libro> &l, vector<Acquisto> &a){
   Acquisto acq;
   Data tmp_data;
 
-  while (indice == -1){
 
     cout << "Inserire l'ISBN del libro venduto: ";
 
-    cin >> ISBN_Venduto;
+    getline(cin, ISBN_Venduto);
 
     indice = RicercaISBN(l, ISBN_Venduto);
 
     if (indice == -1){
-        cout << "ISBN errato o inesistente!\n";
-        exit(0);
+        cout << "ISBN errato o inesistente!\n"
+                "Premi qualsiasi tasto per tornare al menu...";
+        rlutil::anykey();
+        return;
     }
-  }
 
   cout << "Inserire numero di copie vendute: ";
   cin >> tmp_int;
@@ -252,7 +252,7 @@ void Vendita(vector<Libro> &l, vector<Acquisto> &a){
   if (tmp_int > l.at(indice).GetQuantita()){
     cout << "Sono disponibili solo " << l.at(indice).GetQuantita()
          << " copie di quel libro.";
-    exit(0);
+    return;
   };
 
   acq.SetISBN_Acq(ISBN_Venduto);
@@ -379,24 +379,24 @@ void EliminaCliente(vector<Cliente> &c){
 
     int indice;
     unsigned int tessera;
-    bool flag;
-
-    do {
 
       cout << "Inserire l'ID della tessera del cliente da eliminare: ";
       cin >> tessera;
+      cin.ignore();
 
       if (tessera < c.front().GetTessera() || tessera > c.back().GetTessera()){
-        cout << "Errore! ID tessera non esistente!\n";
-        flag = true;
-      } else flag = false;
-
-    } while (flag);
+        cout << "Errore! ID tessera non esistente!\n"
+             << "Premi qualsiasi tasto per tornare al menu...";
+        rlutil::anykey();
+        return;
+      }
 
     indice = RicercaTessera(c, tessera);
     if (indice == -1){
-        cout << "Errore!ID tessera non esistente\n";
-        exit(0);
+      cout << "Errore! ID tessera non esistente!\n"
+           << "Premi qualsiasi tasto per tornare al menu...";
+      rlutil::anykey();
+      return;
     };
 
     c.erase(c.begin()+indice);
@@ -540,10 +540,17 @@ void LibriArrivati(vector<Libro> &l){
     int i;
     unsigned int quantita=0;
 
-    cout << "Inserire l'ISBN del libro arrivati: ";
-    cin >> tmp_string;
+    cout << "Inserire l'ISBN dei libri arrivati: ";
+    getline(cin, tmp_string);
 
     i = RicercaISBN(l, tmp_string);
+
+    if (i == -1){
+      cout << "ISBN errato o inesistente!\n"
+      "Premi qualsiasi tasto per tornare al menu...";
+      rlutil::anykey();
+      return;
+    }
 
     cout << "inserire la quantità di libri arrivati: ";
     cin >> quantita;
