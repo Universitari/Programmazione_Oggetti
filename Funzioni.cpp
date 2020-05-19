@@ -192,6 +192,12 @@ void Aggiunta_Libro(vector<Libro> &l){
 
     l.push_back(tmp_libro);
 
+    rlutil::setColor(2);
+    cout << "Aggiunta avvenuta con successo.\n";
+    rlutil::resetColor();
+    cout << "Premi qualsiasi tasto per tornare al menu...";
+    rlutil::anykey();
+
 }
 
 void PrintLibro(const Libro tmp){
@@ -247,25 +253,33 @@ void Vendita(vector<Libro> &l, vector<Acquisto> &a){
   Data tmp_data;
 
 
-    cout << "Inserire l'ISBN del libro venduto: ";
+  cout << "Inserire l'ISBN del libro venduto: ";
 
-    getline(cin, ISBN_Venduto);
+  getline(cin, ISBN_Venduto);
 
-    indice = RicercaISBN(l, ISBN_Venduto);
+  indice = RicercaISBN(l, ISBN_Venduto);
 
-    if (indice == -1){
-        cout << "ISBN errato o inesistente!\n"
-                "Premi qualsiasi tasto per tornare al menu...";
-        rlutil::anykey();
-        return;
-    }
+  if (indice == -1){
+      rlutil::setColor(4);
+      cout << "ISBN errato o inesistente!\n";
+      rlutil::resetColor();
+      cout << "Premi qualsiasi tasto per tornare al menu...";
+      rlutil::anykey();
+      return;
+  }
 
   cout << "Inserire numero di copie vendute: ";
   tmp_int = Input_int();
 
   if (tmp_int > l.at(indice).GetQuantita()){
-    cout << "Sono disponibili solo " << l.at(indice).GetQuantita()
-         << " copie di quel libro.";
+
+    rlutil::setColor(4);
+    cout << "Errore! Sono disponibili solo " << l.at(indice).GetQuantita()
+         << " copie di quel libro.\n";
+
+    rlutil::resetColor();
+    cout << "Premi qualsiasi tasto per tornare al menu...";
+    rlutil::anykey();
     return;
   };
 
@@ -283,6 +297,12 @@ void Vendita(vector<Libro> &l, vector<Acquisto> &a){
   acq.SetData(tmp_data);
 
   a.push_back(acq);
+
+  rlutil::setColor(2);
+  cout << "Vendita avvenuta con successo.\n";
+  rlutil::resetColor();
+  cout << "Premi qualsiasi tasto per tornare al menu...";
+  rlutil::anykey();
 
 }
 
@@ -386,6 +406,12 @@ void Aggiunta_Cliente(vector<Cliente> &c){
     tmp_cliente.Set_MaxClienti(tmp_cliente.Get_MaxClienti()+1);
 
     c.push_back(tmp_cliente);
+
+    rlutil::setColor(2);
+    cout << "Cliente aggiunto con successo.\n";
+    rlutil::resetColor();
+    cout << "Premi qualsiasi tasto per tornare al menu...";
+    rlutil::anykey();
 
 }
 
