@@ -202,30 +202,31 @@ void Aggiunta_Libro(vector<Libro> &l){
 
 void PrintLibro(const Libro tmp){
 
-  cout << tmp.GetTitolo() <<endl
-       << tmp.GetAutore() <<endl
-       << tmp.GetISBN() <<endl
-       << tmp.GetPrezzo() <<endl
-       << tmp.GetQuantita() <<endl
-       << tmp.GetOrdinati() <<endl;
+  cout << left << setw(49) << setfill(' ') << tmp.GetTitolo()
+       << left << setw(20) << setfill(' ') << tmp.GetISBN()
+       << left << setw(8) << setfill(' ') << tmp.GetPrezzo()
+       << left << setw(10) << setfill(' ') << tmp.GetQuantita()
+       << left << setw(11) << setfill(' ') << tmp.GetOrdinati()
+       << endl << setw(98) << setfill(' ') << tmp.GetAutore()
+       << endl;
 }
 
 void PrintAcquisto(const Acquisto tmp){
 
-  cout << tmp.GetISBN_Acq() << endl
-       << tmp.GetNumero_tessera() << endl
-       << tmp.GetPrezzo_Acq() << endl
-       << tmp.GetData().Giorno << "/"
-       << tmp.GetData().Mese << "/"
-       << tmp.GetData().Anno << endl;
+  cout << left << setw(20) << setfill(' ') << tmp.GetISBN_Acq()
+       << left << setw(10) << setfill(' ') << tmp.GetNumero_tessera()
+       << left << setw(8) << setfill(' ') << tmp.GetPrezzo_Acq()
+       << left << setw(12) << setfill(' ') << Data_to_string(tmp)
+       << endl;
 }
 
 void PrintCliente(const Cliente tmp){
 
-  cout << tmp.GetNome() <<endl
-       << tmp.GetCognome() <<endl
-       << tmp.GetEmail() <<endl
-       << tmp.GetTessera() <<endl;
+  cout << left << setw(20) << setfill(' ') << tmp.GetNome()
+       << left << setw(30) << setfill(' ') << tmp.GetCognome()
+       << left << setw(35) << setfill(' ') << tmp.GetEmail()
+       << left << setw(10) << setfill(' ') << tmp.GetTessera()
+       << endl;
 }
 
 int RicercaISBN(vector<Libro> &l, const string tmp){
@@ -404,6 +405,8 @@ void Aggiunta_Cliente(vector<Cliente> &c){
 
     tmp_cliente.SetTessera(tmp_cliente.Get_MaxClienti()+1);
     tmp_cliente.Set_MaxClienti(tmp_cliente.Get_MaxClienti()+1);
+
+    cout << "Tessera: " << tmp_cliente.GetTessera() << endl;
 
     c.push_back(tmp_cliente);
 
@@ -714,14 +717,8 @@ void StampaLibri(const vector<Libro> &l){
       rlutil::setColor(0);
     } else rlutil::resetColor();
 
+    PrintLibro(l.at(i));
 
-    cout << left << setw(49) << setfill(' ') << l.at(i).GetTitolo()
-         << left << setw(20) << setfill(' ') << l.at(i).GetISBN()
-         << left << setw(8) << setfill(' ') << l.at(i).GetPrezzo()
-         << left << setw(10) << setfill(' ') << l.at(i).GetQuantita()
-         << left << setw(11) << setfill(' ') << l.at(i).GetOrdinati()
-         << endl << setw(98) << setfill(' ') << l.at(i).GetAutore()
-         << endl;
   }
 
   rlutil::resetColor();
@@ -747,12 +744,7 @@ void StampaAcquisti(const vector<Acquisto> &a){
       rlutil::setColor(0);
     } else rlutil::resetColor();
 
-
-    cout << left << setw(20) << setfill(' ') << a.at(i).GetISBN_Acq()
-         << left << setw(10) << setfill(' ') << a.at(i).GetNumero_tessera()
-         << left << setw(8) << setfill(' ') << a.at(i).GetPrezzo_Acq()
-         << left << setw(12) << setfill(' ') << Data_to_string(a.at(i))
-         << endl;
+    PrintAcquisto(a.at(i));
 
   }
 
@@ -779,12 +771,7 @@ void StampaClienti(const vector<Cliente> &c){
       rlutil::setColor(0);
     } else rlutil::resetColor();
 
-
-    cout << left << setw(20) << setfill(' ') << c.at(i).GetNome()
-         << left << setw(30) << setfill(' ') << c.at(i).GetCognome()
-         << left << setw(35) << setfill(' ') << c.at(i).GetEmail()
-         << left << setw(10) << setfill(' ') << c.at(i).GetTessera()
-         << endl;
+    PrintCliente(c.at(i));
 
   }
 

@@ -225,6 +225,8 @@ scelta = Inserimento_Scelta(3);
 			default:
 				return;
 	}
+
+	Menu_Stampa(l, a, c);
 }
 
 unsigned int Inserimento_Scelta(int max){
