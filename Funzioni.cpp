@@ -317,18 +317,20 @@ void Vendita(vector<Libro> &l, vector<Acquisto> &a){
     rlutil::anykey();
     return;
   };
-
+  // ISBN_Sold
   acq.SetISBN_Acq(ISBN_Venduto);
 
   l.at(indice).RiduciQuantita(tmp_int);
 
   cout << "inserire il numero della tessera del cliente (0 se non tesserato): ";
   tmp_tessera = Input_int();
+  // Tessera
   acq.SetTessera(tmp_tessera);
-
+  // Prezzo
   acq.SetPrezzo_Acq(l.at(indice).GetPrezzo() * tmp_int);
 
   tmp_data = InserimentoData();
+  // Data
   acq.SetData(tmp_data);
 
   a.push_back(acq);
