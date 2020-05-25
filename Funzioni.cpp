@@ -157,6 +157,8 @@ void Aggiunta_Libro(vector<Libro> &l){
   string tmp_string;
   float tmp_float = 0;
   unsigned int tmp_int = 0;
+  bool flag=true;
+  char tmp_char;
 
   cout << "AGGIUNTA LIBRO\n";
 
@@ -190,13 +192,28 @@ void Aggiunta_Libro(vector<Libro> &l){
     tmp_int = Input_int();
       tmp_libro.SetOrdinati(tmp_int);
 
-    l.push_back(tmp_libro);
+    cout << "Vuoi procedere all'aggiunta di questo libro? (y/n)... ";
 
-    rlutil::setColor(2);
-    cout << "Aggiunta avvenuta con successo.\n";
-    rlutil::setColor(15);
-    cout << "Premi qualsiasi tasto per tornare al menu...";
-    rlutil::anykey();
+    do{
+
+      cin >> tmp_char;
+      cin.ignore();
+      if (tmp_char == 'y' || tmp_char == 'Y'){
+        flag = false;
+        l.push_back(tmp_libro);
+        rlutil::setColor(2);
+        cout << "Aggiunta avvenuta con successo.\n";
+      }
+        else if (tmp_char == 'n' || tmp_char == 'N')
+          flag = false;
+        else
+          cout << "inserire una scelta valida...";
+
+    } while(flag);
+
+      rlutil::setColor(15);
+      cout << "Premi qualsiasi tasto per tornare al menu...";
+      rlutil::anykey();
 
 }
 
@@ -387,6 +404,8 @@ void Aggiunta_Cliente(vector<Cliente> &c){
 
     string tmp_string;
     Cliente tmp_cliente;
+    bool flag=true;
+    char tmp_char;
 
     cout << "AGGIUNTA CLIENTE\n";
 
@@ -408,10 +427,25 @@ void Aggiunta_Cliente(vector<Cliente> &c){
 
     cout << "Tessera: " << tmp_cliente.GetTessera() << endl;
 
-    c.push_back(tmp_cliente);
+    cout << "Vuoi procedere all'aggiunta di questo cliente? (y/n)... ";
 
-    rlutil::setColor(2);
-    cout << "Cliente aggiunto con successo.\n";
+    do{
+
+      cin >> tmp_char;
+      cin.ignore();
+      if (tmp_char == 'y' || tmp_char == 'Y'){
+        flag = false;
+        c.push_back(tmp_cliente);
+        rlutil::setColor(2);
+        cout << "Aggiunta avvenuta con successo.\n";
+      }
+        else if (tmp_char == 'n' || tmp_char == 'N')
+          flag = false;
+        else
+          cout << "inserire una scelta valida...";
+
+    } while(flag);
+
     rlutil::setColor(15);
     cout << "Premi qualsiasi tasto per tornare al menu...";
     rlutil::anykey();
@@ -590,6 +624,15 @@ void OrdinaLibri(vector<Libro> &l){
 
     i = RicercaISBN(l, tmp_string);
 
+    if (i == -1){
+      rlutil::setColor(4);
+      cout << "ISBN errato o inesistente!\n";
+      rlutil::setColor(15);
+      cout << "Premi qualsiasi tasto per tornare al menu...";
+      rlutil::anykey();
+      return;
+    }
+
     cout << "inserire la quantità di libri ordinati: ";
     quantita = Input_int();
 
@@ -609,8 +652,10 @@ void LibriArrivati(vector<Libro> &l){
     i = RicercaISBN(l, tmp_string);
 
     if (i == -1){
-      cout << "ISBN errato o inesistente!\n"
-      "Premi qualsiasi tasto per tornare al menu...";
+      rlutil::setColor(4);
+      cout << "ISBN errato o inesistente!\n";
+      rlutil::setColor(15);
+      cout << "Premi qualsiasi tasto per tornare al menu...";
       rlutil::anykey();
       return;
     }
