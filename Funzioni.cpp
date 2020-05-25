@@ -715,6 +715,7 @@ int Input_int(){
 
 }
 
+//Funzione di controllo per input float errati
 float Input_float(){
 
   float x;
@@ -736,6 +737,8 @@ float Input_float(){
 
 }
 
+//Funzione utilizzata nelle inizializzazioni
+//Controlla se un file è vuoto
 bool File_Vuoto(ifstream& input){
 
     return input.peek() == ifstream::traits_type::eof();
