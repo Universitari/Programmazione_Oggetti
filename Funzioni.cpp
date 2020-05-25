@@ -5,16 +5,20 @@
 
 using namespace std;
 
+// Inizializzazione di un vettore di "Libro" dal file "Libri.txt"
 void init_l(vector<Libro> &l) {
 
   ifstream input;
 
+  // Apertura file.
   input.open("Libri.txt");
+  // Controllo dell'apertura del file.
   if (!input.good()){
     cout << "Errore nell'apertura del file";
     exit(0);
   };
 
+  // In caso di file vuoto il vettore di "Libro" rimarrà vuoto.
   if (File_Vuoto(input)){
     input.close();
     return;
@@ -25,33 +29,42 @@ void init_l(vector<Libro> &l) {
   float tmp_float;
   unsigned int tmp_int;
 
+  // Estrazione dei dati dal file di testo.
   while (tmp_string != ";"){
 
-    getline(input, tmp_string, ',');
+    // Titolo
+    getline(input, tmp_string, ',');      // getline che legge fino ad una virgola
       tmp_libro.SetTitolo(tmp_string);
+    // Autore
     getline(input, tmp_string, ',');
       tmp_libro.SetAutore(tmp_string);
+    // ISBN
     getline(input, tmp_string, ',');
       tmp_libro.SetISBN(tmp_string);
-    input >> tmp_float;
-    input.ignore(1);
+    // Prezzo
+    input >> tmp_float;                   // Operatore >> estrae il numero
+    input.ignore(1);                      // e ignore(1) salta la virgola
       tmp_libro.SetPrezzo(tmp_float);
+    // Quantità in stock
     input >> tmp_int;
     input.ignore(1);
       tmp_libro.SetQuantita(tmp_int);
+    // Quantità ordinati
     input >> tmp_int;
       tmp_libro.SetOrdinati(tmp_int);
 
     input >> tmp_string;
     input.ignore();
 
-    l.push_back(tmp_libro);
+    l.push_back(tmp_libro);               // Il libro viene aggiunto in coda al vettore
 
   };
 
+  // Chiusuar input
   input.close();
 };
 
+// Inizializzazione di un vettore di "Acquisto" dal file "Acquisti.txt"
 void init_a(vector<Acquisto> &a) {
 
   ifstream input;
@@ -105,6 +118,7 @@ void init_a(vector<Acquisto> &a) {
   input.close();
 };
 
+// Inizializzazione di un vettore di "Cliente" dal file "Clienti.txt"
 void init_c(vector<Cliente> &c){
 
   ifstream input;
@@ -151,6 +165,7 @@ void init_c(vector<Cliente> &c){
 
 }
 
+// Aggiunta di un nuovo elemento nel vettore di "Libro"
 void Aggiunta_Libro(vector<Libro> &l){
 
   Libro tmp_libro;
