@@ -730,7 +730,7 @@ int Input_int(){
 
 }
 
-//Funzione di controllo per input float errati
+// Funzione di controllo per input float errati
 float Input_float(){
 
   float x;
@@ -752,22 +752,22 @@ float Input_float(){
 
 }
 
-//Funzione utilizzata nelle inizializzazioni
-//Controlla se un file è vuoto
+// Funzione utilizzata nelle inizializzazioni
+// Controlla se un file è vuoto
 bool File_Vuoto(ifstream& input){
 
     return input.peek() == ifstream::traits_type::eof();
 
 }
 
-//Funzione di stampa dei libri in menù visualizzazione
+// Funzione di stampa dei libri in menù visualizzazione
 void StampaLibri(const vector<Libro> &l){
 
   int i;
 
   rlutil::setColor(3);
 
-//Formattazione della tabella
+// Formattazione del testo
   cout << left << setw(49) << setfill(' ') << "Titolo, Autore"
        << left << setw(20) << setfill(' ') << "ISBN"
        << left << setw(8) << setfill(' ') << "Prezzo"
@@ -784,7 +784,7 @@ void StampaLibri(const vector<Libro> &l){
       rlutil::setColor(0);
     } else rlutil::resetColor();
 	  
-//Chimata della stampa primaria
+// Chimata della stampa primaria
     PrintLibro(l.at(i));
 
   }
@@ -793,14 +793,14 @@ void StampaLibri(const vector<Libro> &l){
 
 }
 
-//Funzione di stampa degli acquisti in menù visualizzazione
+// Funzione di stampa degli acquisti in menù visualizzazione
 void StampaAcquisti(const vector<Acquisto> &a){
 
   int i;
 
   rlutil::setColor(3);
 
-//Formattazione della tabella
+// Formattazione del testo
   cout << left << setw(20) << setfill(' ') << "ISBN"
        << left << setw(10) << setfill(' ') << "Tessera"
        << left << setw(8) << setfill(' ') << "Prezzo"
@@ -816,7 +816,7 @@ void StampaAcquisti(const vector<Acquisto> &a){
       rlutil::setColor(0);
     } else rlutil::resetColor();
   
-//Chimata della stampa primaria
+// Chimata della stampa primaria
     PrintAcquisto(a.at(i));
 
   }
@@ -825,14 +825,14 @@ void StampaAcquisti(const vector<Acquisto> &a){
 
 }
 
-//Funzione di stampa dei clienti in menù visualizzazione
+// Funzione di stampa dei clienti in menù visualizzazione
 void StampaClienti(const vector<Cliente> &c){
 
   int i;
 
   rlutil::setColor(3);
 	
-//Formattazione della tabella
+// Formattazione del testo
   cout << left << setw(20) << setfill(' ') << "Nome"
        << left << setw(30) << setfill(' ') << "Cognome"
        << left << setw(35) << setfill(' ') << "Email"
@@ -848,7 +848,7 @@ void StampaClienti(const vector<Cliente> &c){
       rlutil::setColor(0);
     } else rlutil::resetColor();
 	  
-//Chimata della stampa primaria
+// Chimata della stampa primaria
     PrintCliente(c.at(i));
 
   }
