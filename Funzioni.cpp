@@ -10,20 +10,21 @@ void init_l(vector<Libro> &l) {
 
   ifstream input;
 
-  // Apertura file.
+  // Apertura file
   input.open("Libri.txt");
-  // Controllo dell'apertura del file.
+  // Controllo dell'apertura del file
   if (!input.good()){
     cout << "Errore nell'apertura del file";
     exit(0);
   };
 
-  // In caso di file vuoto il vettore di "Libro" rimarrà vuoto.
+  // In caso di file vuoto il vettore di "Libro" rimarrà vuoto
   if (File_Vuoto(input)){
     input.close();
     return;
   }
 
+  // Dichiarazione variabili temporanee
   Libro tmp_libro;
   string tmp_string = "";
   float tmp_float;
@@ -56,11 +57,12 @@ void init_l(vector<Libro> &l) {
     input >> tmp_string;
     input.ignore();
 
-    l.push_back(tmp_libro);               // Il libro viene aggiunto in coda al vettore
+    // Il libro viene aggiunto in coda al vettore
+    l.push_back(tmp_libro);
 
   };
 
-  // Chiusuar input
+  // Chiusura file
   input.close();
 };
 
@@ -69,17 +71,21 @@ void init_a(vector<Acquisto> &a) {
 
   ifstream input;
 
+  // Apertura file
   input.open("Acquisti.txt");
+  // Controllo dell'apertura del file
   if (!input.good()){
     cout << "Errore nell'apertura del file";
     exit(0);
   }
 
+  // In caso di file vuoto il vettore di "Acquisto" rimarrà vuoto
   if (File_Vuoto(input)){
     input.close();
     return;
   }
 
+  // Dichiarazione variabili temporanee
   Acquisto tmp_acquisto;
   string tmp_string = "";
   unsigned int tmp_int;
@@ -88,11 +94,11 @@ void init_a(vector<Acquisto> &a) {
 
   while (tmp_string != ";"){
 
-    getline(input, tmp_string, ',');
+    getline(input, tmp_string, ',');            // getline che legge fino ad una virgola
         tmp_acquisto.SetISBN_Acq(tmp_string);
 
-    input >> tmp_int;
-        input.ignore(1);
+    input >> tmp_int;                           // Operatore >> estrae il numero
+        input.ignore(1);                        // e ignore(1) salta la virgola
             tmp_acquisto.SetTessera(tmp_int);
 
     input >> tmp_float;
@@ -112,9 +118,12 @@ void init_a(vector<Acquisto> &a) {
 
     input.ignore();
 
+    // L'Acquisto viene aggiunto in coda al vettore
     a.push_back(tmp_acquisto);
+
   };
 
+  // Chiusura file
   input.close();
 };
 
@@ -123,17 +132,21 @@ void init_c(vector<Cliente> &c){
 
   ifstream input;
 
+  // Apertura file
   input.open("Clienti.txt");
+  // Controllo dell'apertura del file
   if (!input.good()){
     cout << "Errore nell'apertura del file";
     exit(0);
   }
 
+  // In caso di file vuoto il vettore di "Cliente" rimarrà vuoto
   if (File_Vuoto(input)){
     input.close();
     return;
   }
 
+  // Dichiarazione variabili temporanee
   Cliente tmp_cliente;
   string tmp_string = "";
   unsigned int tmp_int;
@@ -144,23 +157,25 @@ void init_c(vector<Cliente> &c){
 
   while (tmp_string != ";"){
 
-    getline(input, tmp_string, ',');
+    getline(input, tmp_string, ',');            // getline che legge fino ad una virgola
       tmp_cliente.SetNome(tmp_string);
     getline(input, tmp_string, ',');
       tmp_cliente.SetCognome(tmp_string);
     getline(input, tmp_string, ',');
       tmp_cliente.SetEmail(tmp_string);
-    input >> tmp_int;
-      tmp_cliente.SetTessera(tmp_int);
+    input >> tmp_int;                           // Operatore >> estrae il numero
+      tmp_cliente.SetTessera(tmp_int);          // e ignore(1) salta la virgola
 
     input >> tmp_string;
 
     input.ignore();
 
+    // Il Cliente viene aggiunto in coda al vettore
     c.push_back(tmp_cliente);
 
 }
 
+  // Chiusura file
   input.close();
 
 }
@@ -235,7 +250,7 @@ void Aggiunta_Libro(vector<Libro> &l){
 
 // Funzione di stampa principale_Libri
 void PrintLibro(const Libro tmp){
-	
+
   cout << left << setw(49) << setfill(' ') << tmp.GetTitolo()
        << left << setw(20) << setfill(' ') << tmp.GetISBN()
        << left << setw(8) << setfill(' ') << tmp.GetPrezzo()
@@ -246,7 +261,7 @@ void PrintLibro(const Libro tmp){
 }
 // Funzione di stampa principale_Acquisti
 void PrintAcquisto(const Acquisto tmp){
-  
+
   cout << left << setw(20) << setfill(' ') << tmp.GetISBN_Acq()
        << left << setw(10) << setfill(' ') << tmp.GetNumero_tessera()
        << left << setw(8) << setfill(' ') << tmp.GetPrezzo_Acq()
@@ -785,7 +800,7 @@ void StampaLibri(const vector<Libro> &l){
       rlutil::setBackgroundColor(7);
       rlutil::setColor(0);
     } else rlutil::resetColor();
-	  
+
 // Chimata della stampa primaria
     PrintLibro(l.at(i));
 
@@ -817,7 +832,7 @@ void StampaAcquisti(const vector<Acquisto> &a){
       rlutil::setBackgroundColor(7);
       rlutil::setColor(0);
     } else rlutil::resetColor();
-  
+
 // Chimata della stampa primaria
     PrintAcquisto(a.at(i));
 
@@ -833,7 +848,7 @@ void StampaClienti(const vector<Cliente> &c){
   int i;
 
   rlutil::setColor(3);
-	
+
 // Formattazione del testo
   cout << left << setw(20) << setfill(' ') << "Nome"
        << left << setw(30) << setfill(' ') << "Cognome"
@@ -849,7 +864,7 @@ void StampaClienti(const vector<Cliente> &c){
       rlutil::setBackgroundColor(7);
       rlutil::setColor(0);
     } else rlutil::resetColor();
-	  
+
 // Chimata della stampa primaria
     PrintCliente(c.at(i));
 
