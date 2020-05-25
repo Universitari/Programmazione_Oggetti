@@ -231,9 +231,9 @@ void Aggiunta_Libro(vector<Libro> &l){
       rlutil::anykey();
 
 }
-
+// Funzione di stampa principale_Libri
 void PrintLibro(const Libro tmp){
-
+  // Formattazione testo
   cout << left << setw(49) << setfill(' ') << tmp.GetTitolo()
        << left << setw(20) << setfill(' ') << tmp.GetISBN()
        << left << setw(8) << setfill(' ') << tmp.GetPrezzo()
@@ -242,7 +242,7 @@ void PrintLibro(const Libro tmp){
        << endl << setw(98) << setfill(' ') << tmp.GetAutore()
        << endl;
 }
-
+// Funzione di stampa principale_Acquisti
 void PrintAcquisto(const Acquisto tmp){
 
   cout << left << setw(20) << setfill(' ') << tmp.GetISBN_Acq()
@@ -251,7 +251,7 @@ void PrintAcquisto(const Acquisto tmp){
        << left << setw(12) << setfill(' ') << Data_to_string(tmp)
        << endl;
 }
-
+// Funzione di stampa principale_Clienti
 void PrintCliente(const Cliente tmp){
 
   cout << left << setw(20) << setfill(' ') << tmp.GetNome()
