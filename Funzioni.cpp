@@ -183,6 +183,7 @@ void init_c(vector<Cliente> &c){
 // Aggiunta di un nuovo elemento nel vettore di "Libro"
 void Aggiunta_Libro(vector<Libro> &l){
 
+  // Dichiarazione variabili temporanee
   Libro tmp_libro;
   string tmp_string;
   float tmp_float = 0;
@@ -193,7 +194,7 @@ void Aggiunta_Libro(vector<Libro> &l){
   cout << "AGGIUNTA LIBRO\n";
 
     cout << "Titolo: ";
-    getline(cin, tmp_string);
+    getline(cin, tmp_string);           // Lettura di testo con getline
       tmp_libro.SetTitolo(tmp_string);
 
     cout << "Autore: ";
@@ -203,8 +204,18 @@ void Aggiunta_Libro(vector<Libro> &l){
     cout << "ISBN: ";
     getline(cin, tmp_string);
 
+    // controllo sull'ISBN del libro
     if (RicercaISBN(l, tmp_string) != -1){
-      cout << "Errore, ISBN già presente.";
+      // Imposta colore rosso
+      rlutil::setColor(4);
+      cout << "Errore! ISBN già presente!\n";
+
+      // Imposta colore bianco
+      rlutil::setColor(15);
+      cout << "Premi qualsiasi tasto per tornare al menu...";
+
+      // Mette in pausa il programma fino alla pressione di un tasto qualsiasi
+      rlutil::anykey();
       return;
     }
 
@@ -224,18 +235,18 @@ void Aggiunta_Libro(vector<Libro> &l){
 
     cout << "Vuoi procedere all'aggiunta di questo libro? (y/n)... ";
 
+    // Ciclo per evitare input diversi da y/Y e n/N
     do{
-
       cin >> tmp_char;
       cin.ignore();
       if (tmp_char == 'y' || tmp_char == 'Y'){
-        flag = false;
-        l.push_back(tmp_libro);
+        flag = false;   // Ferma il ciclo
+        l.push_back(tmp_libro);   // Aggiunge il libro in coda al vettore di "Libro"
         rlutil::setColor(2);
         cout << "Aggiunta avvenuta con successo.\n";
       }
         else if (tmp_char == 'n' || tmp_char == 'N')
-          flag = false;
+          flag = false;   // Ferma il ciclo
         else
           cout << "inserire una scelta valida...";
 
@@ -246,11 +257,12 @@ void Aggiunta_Libro(vector<Libro> &l){
       rlutil::anykey();
 
 }
-// setw() si occupa della formattazione del testo
 
-// Funzione di stampa principale_Libri
+// Funzione di stampa di oggetti "Libro"
 void PrintLibro(const Libro tmp){
 
+  // Formattazione del testo tramite <iomanip>
+  // e stampa tramite funzioni "Get" dichiarate nella classe
   cout << left << setw(49) << setfill(' ') << tmp.GetTitolo()
        << left << setw(20) << setfill(' ') << tmp.GetISBN()
        << left << setw(8) << setfill(' ') << tmp.GetPrezzo()
@@ -259,18 +271,24 @@ void PrintLibro(const Libro tmp){
        << endl << setw(98) << setfill(' ') << tmp.GetAutore()
        << endl;
 }
+
 // Funzione di stampa principale_Acquisti
 void PrintAcquisto(const Acquisto tmp){
 
+  // Formattazione del testo tramite <iomanip>
+  // e stampa tramite funzioni "Get" dichiarate nella classe
   cout << left << setw(20) << setfill(' ') << tmp.GetISBN_Acq()
        << left << setw(10) << setfill(' ') << tmp.GetNumero_tessera()
        << left << setw(8) << setfill(' ') << tmp.GetPrezzo_Acq()
        << left << setw(12) << setfill(' ') << Data_to_string(tmp)
        << endl;
 }
+
 // Funzione di stampa principale_Clienti
 void PrintCliente(const Cliente tmp){
 
+  // Formattazione del testo tramite <iomanip>
+  // e stampa tramite funzioni "Get" dichiarate nella classe
   cout << left << setw(20) << setfill(' ') << tmp.GetNome()
        << left << setw(30) << setfill(' ') << tmp.GetCognome()
        << left << setw(35) << setfill(' ') << tmp.GetEmail()
@@ -278,12 +296,13 @@ void PrintCliente(const Cliente tmp){
        << endl;
 }
 
+// Funziona di ricerca dell'ISBN che ritorna l'indice del vettore
 int RicercaISBN(vector<Libro> &l, const string tmp){
 
   int i = 0;
 
   while (i < l.size()) {
-    if (tmp.compare(l.at(i).GetISBN()) == 0)
+    if (tmp.compare(l.at(i).GetISBN()) == 0) // True se i due ISBN sono uguali
         return i;
   i++;
 
@@ -292,6 +311,7 @@ int RicercaISBN(vector<Libro> &l, const string tmp){
   return(-1);
 }
 
+// Funzione per la gestione della vendita di libri
 void Vendita(vector<Libro> &l, vector<Acquisto> &a){
 
   string ISBN_Venduto;
@@ -302,13 +322,11 @@ void Vendita(vector<Libro> &l, vector<Acquisto> &a){
   Acquisto acq;
   Data tmp_data;
 
-
   cout << "Inserire l'ISBN del libro venduto: ";
-
   getline(cin, ISBN_Venduto);
-
   indice = RicercaISBN(l, ISBN_Venduto);
 
+  // Controllo per ISBN già presenti nel vettore
   if (indice == -1){
       rlutil::setColor(4);
       cout << "ISBN errato o inesistente!\n";
@@ -332,22 +350,23 @@ void Vendita(vector<Libro> &l, vector<Acquisto> &a){
     rlutil::anykey();
     return;
   };
-  // ISBN_Sold
+
   acq.SetISBN_Acq(ISBN_Venduto);
 
   l.at(indice).RiduciQuantita(tmp_int);
 
   cout << "inserire il numero della tessera del cliente (0 se non tesserato): ";
   tmp_tessera = Input_int();
-  // Tessera
+
   acq.SetTessera(tmp_tessera);
-  // Prezzo
+
+  // Imposta il prezzo moltiplicandolo per la quantità venduta
   acq.SetPrezzo_Acq(l.at(indice).GetPrezzo() * tmp_int);
 
   tmp_data = InserimentoData();
-  // Data
   acq.SetData(tmp_data);
 
+  // L'acquisto viene aggiunto in coda al vettore
   a.push_back(acq);
 
   rlutil::setColor(2);
@@ -358,8 +377,11 @@ void Vendita(vector<Libro> &l, vector<Acquisto> &a){
 
 }
 
+// Funzione di controllo per l'inserimento del giorno
 short int MaxGiorno(short int m, short int y){
 
+  // La funzione ritorna il giorno massimo che può essere impostato in base
+  // al mese e all'anno passati alla funzione
 	switch (m){
 
 	    case 4:
@@ -373,7 +395,7 @@ short int MaxGiorno(short int m, short int y){
 
     	case 2:{
 
-    	    if (y % 400 == 0 || (y % 4 == 0 && y % 100 != 0))
+    	    if (y % 400 == 0 || (y % 4 == 0 && y % 100 != 0)) // Anno bisestile
     	         return 29;
     	    else return 28;
     		break;
@@ -389,6 +411,7 @@ short int MaxGiorno(short int m, short int y){
     	}
 }
 
+// Funzione per l'inserimento della data
 Data InserimentoData(){
 
   short int d,m,y;
@@ -434,6 +457,7 @@ return tmp;
 
 }
 
+// Funzione di aggiunta Clienti
 void Aggiunta_Cliente(vector<Cliente> &c){
 
     string tmp_string;
@@ -456,6 +480,7 @@ void Aggiunta_Cliente(vector<Cliente> &c){
     getline(cin, tmp_string);
         tmp_cliente.SetEmail(tmp_string);
 
+    // Gestione automatica del numero tessera
     tmp_cliente.SetTessera(tmp_cliente.Get_MaxClienti()+1);
     tmp_cliente.Set_MaxClienti(tmp_cliente.Get_MaxClienti()+1);
 
@@ -463,6 +488,7 @@ void Aggiunta_Cliente(vector<Cliente> &c){
 
     cout << "Vuoi procedere all'aggiunta di questo cliente? (y/n)... ";
 
+    // Ciclo per evitare input diversi da y/Y e n/N
     do{
 
       cin >> tmp_char;
@@ -477,15 +503,14 @@ void Aggiunta_Cliente(vector<Cliente> &c){
           flag = false;
         else
           cout << "inserire una scelta valida...";
-
     } while(flag);
 
     rlutil::setColor(15);
     cout << "Premi qualsiasi tasto per tornare al menu...";
     rlutil::anykey();
-
 }
 
+// Funzione di eliminazione clienti
 void EliminaCliente(vector<Cliente> &c){
 
     int indice;
@@ -529,12 +554,14 @@ void EliminaCliente(vector<Cliente> &c){
 
 }
 
+// Funzione ricerca tessera che ritorna l'indice del vettore
 int RicercaTessera(vector<Cliente> &c, unsigned int tessera){
 
     int min = 0;
     int max = c.size() - 1;
     int mid;
 
+    // Ricerca binaria
     while (min <= max){
 
         mid = (min + max) / 2;
@@ -545,18 +572,19 @@ int RicercaTessera(vector<Cliente> &c, unsigned int tessera){
         if (c.at(mid).GetTessera() < tessera)
             min = mid + 1;
         else max = mid -1;
-
     }
 
     return -1;
 }
 
+// Funzione di salvataggio del vettore di "Libro" su file
 void save_l(vector<Libro> &l){
 
     ofstream output;
 
-    output.open("Libri.txt");
+    output.open("Libri.txt"); // Apertura file
 
+    // Controllo sull'apertura del file
     if (!output.good()){
 
       rlutil::setColor(4);
@@ -581,15 +609,17 @@ void save_l(vector<Libro> &l){
 
     }
 
-    output.close();
+    output.close(); // Chiusura file
 }
 
+// Funzione di salvataggio del vettore di "Acquisto" su file
 void save_a(vector<Acquisto> &a){
 
   ofstream output;
 
-  output.open("Acquisti.txt");
+  output.open("Acquisti.txt"); // Apertura file
 
+  // Controllo sull'apertura del file
   if (!output.good()){
 
     rlutil::setColor(4);
@@ -614,14 +644,17 @@ void save_a(vector<Acquisto> &a){
       else output << ",\n";
   }
 
+  output.close(); // Chiusura file
 }
 
+// Funzione di salvataggio del vettore di "Cliente" su file
 void save_c(vector<Cliente> &c){
 
     ofstream output;
 
-    output.open("Clienti.txt");
+    output.open("Clienti.txt"); // Apertura file
 
+    // Controllo sull'apertura del file
     if (!output.good()){
         rlutil::setColor(4);
         cout << "Errore nell'apertura del file di output!\n";
@@ -645,8 +678,10 @@ void save_c(vector<Cliente> &c){
         else output << ",\n";
     }
 
+    output.close(); // Chiusura file
 }
 
+// Funzione per la gestione dei libri ordinati
 void OrdinaLibri(vector<Libro> &l){
 
     string tmp_string;
@@ -674,6 +709,7 @@ void OrdinaLibri(vector<Libro> &l){
 
 }
 
+// Funzione per la gestione dei libri ordinati e in stock
 void LibriArrivati(vector<Libro> &l){
 
     string tmp_string;
@@ -715,12 +751,13 @@ void LibriArrivati(vector<Libro> &l){
 
 }
 
+// Funzione di conversione della struct "Data" in stringa
 string Data_to_string(Acquisto a){
 
   string tmp_string;
 
   tmp_string = to_string(a.GetData().Giorno);
-  tmp_string += "/";
+  tmp_string += "/";  // += operatore che esegue append della classe string
   tmp_string += to_string(a.GetData().Mese);
   tmp_string += "/";
   tmp_string += to_string(a.GetData().Anno);
@@ -728,6 +765,7 @@ string Data_to_string(Acquisto a){
   return tmp_string;
 }
 
+// Funzione di input di variabili int con controlli sul tipo
 int Input_int(){
 
   int x;
@@ -749,7 +787,7 @@ int Input_int(){
 
 }
 
-// Funzione di controllo per input float errati
+// Funzione di input di variabili float con controlli sul tipo
 float Input_float(){
 
   float x;
@@ -771,8 +809,7 @@ float Input_float(){
 
 }
 
-// Funzione utilizzata nelle inizializzazioni
-// Controlla se un file è vuoto
+// Funzione di controllo su file vuoti
 bool File_Vuoto(ifstream& input){
 
     return input.peek() == ifstream::traits_type::eof();
@@ -786,7 +823,7 @@ void StampaLibri(const vector<Libro> &l){
 
   rlutil::setColor(3);
 
-// Formattazione del testo
+// Formattazione del testo e stampa identificatori della colonna
   cout << left << setw(49) << setfill(' ') << "Titolo, Autore"
        << left << setw(20) << setfill(' ') << "ISBN"
        << left << setw(8) << setfill(' ') << "Prezzo"
@@ -798,12 +835,13 @@ void StampaLibri(const vector<Libro> &l){
 
   for (i = 0; i < l.size(); i++ ){
 
+    // Gestione del colore alternato del background
     if (i%2 == 1){
       rlutil::setBackgroundColor(7);
       rlutil::setColor(0);
     } else rlutil::resetColor();
 
-// Chimata della stampa primaria
+    // Funzione di stampa del singolo elemento
     PrintLibro(l.at(i));
 
   }
@@ -819,7 +857,7 @@ void StampaAcquisti(const vector<Acquisto> &a){
 
   rlutil::setColor(3);
 
-// Formattazione del testo
+// Formattazione del testo e stampa identificatori della colonna
   cout << left << setw(20) << setfill(' ') << "ISBN"
        << left << setw(10) << setfill(' ') << "Tessera"
        << left << setw(8) << setfill(' ') << "Prezzo"
@@ -830,18 +868,18 @@ void StampaAcquisti(const vector<Acquisto> &a){
 
   for (i = 0; i < a.size(); i++ ){
 
+    // Gestione del colore alternato del background
     if (i%2 == 1){
       rlutil::setBackgroundColor(7);
       rlutil::setColor(0);
     } else rlutil::resetColor();
 
-// Chimata della stampa primaria
+    // Funzione di stampa del singolo elemento
     PrintAcquisto(a.at(i));
 
   }
 
   rlutil::resetColor();
-
 }
 
 // Funzione di stampa dei clienti in menù visualizzazione
@@ -851,7 +889,7 @@ void StampaClienti(const vector<Cliente> &c){
 
   rlutil::setColor(3);
 
-// Formattazione del testo
+  // Formattazione del testo e stampa identificatori della colonna
   cout << left << setw(20) << setfill(' ') << "Nome"
        << left << setw(30) << setfill(' ') << "Cognome"
        << left << setw(35) << setfill(' ') << "Email"
@@ -862,12 +900,13 @@ void StampaClienti(const vector<Cliente> &c){
 
   for (i = 0; i < c.size(); i++ ){
 
+    // Gestione del colore alternato del background
     if (i%2 == 1){
       rlutil::setBackgroundColor(7);
       rlutil::setColor(0);
     } else rlutil::resetColor();
 
-// Chimata della stampa primaria
+    // Funzione di stampa del singolo elemento
     PrintCliente(c.at(i));
 
   }
