@@ -14,7 +14,7 @@ void Menu_Principale(vector<Libro> &l, vector<Acquisto> &a, vector<Cliente> &c) 
 	rlutil::setColor(3);
 	cout << "MENU PRINCIPALE\n";
 
-	rlutil::resetColor();
+	rlutil::setColor(15);
 	cout <<	"1. Ricerca libro\n"
 					"2. Gestisci dati\n"
 					"3. Visualizza dati\n"
@@ -89,7 +89,8 @@ void Menu_GestioneDati(vector<Libro> &l, vector<Acquisto> &a, vector<Cliente> &c
 	rlutil::setColor(3);
 	cout << "MENU GESTIONE DATI\n";
 
-	rlutil::resetColor();
+	rlutil::setColor(15);
+
 	cout << "1. Aggiungi Libro\n"
 	        "2. Aggiungi Cliente\n"
 	        "3. Vendi libro\n"
@@ -146,7 +147,8 @@ void Menu_Ordinazioni(vector<Libro> &l, vector<Acquisto> &a, vector<Cliente> &c)
 	rlutil::setColor(3);
 	cout << "MENU ORDINAZIONI\n";
 
-	rlutil::resetColor();
+	rlutil::setColor(15);
+
 	cout << "1. Aggiungi libri ordinati\n"
 	        "2. Libri arrivati\n"
 					"0. Indietro\n"
@@ -184,7 +186,8 @@ void Menu_Stampa(vector<Libro> &l, vector<Acquisto> &a, vector<Cliente> &c){
 	rlutil::setColor(3);
 	cout << "MENU VISUALIZZAZIONE DATI\n";
 
-	rlutil::resetColor();
+	rlutil::setColor(15);
+	
 	cout << "1. Stampa lista libri\n"
 				  "2. Stampa lista acquisti\n"
 	        "3. Stampa lista clienti\n"

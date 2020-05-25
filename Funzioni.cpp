@@ -194,7 +194,7 @@ void Aggiunta_Libro(vector<Libro> &l){
 
     rlutil::setColor(2);
     cout << "Aggiunta avvenuta con successo.\n";
-    rlutil::resetColor();
+    rlutil::setColor(15);
     cout << "Premi qualsiasi tasto per tornare al menu...";
     rlutil::anykey();
 
@@ -263,7 +263,7 @@ void Vendita(vector<Libro> &l, vector<Acquisto> &a){
   if (indice == -1){
       rlutil::setColor(4);
       cout << "ISBN errato o inesistente!\n";
-      rlutil::resetColor();
+      rlutil::setColor(15);
       cout << "Premi qualsiasi tasto per tornare al menu...";
       rlutil::anykey();
       return;
@@ -278,7 +278,7 @@ void Vendita(vector<Libro> &l, vector<Acquisto> &a){
     cout << "Errore! Sono disponibili solo " << l.at(indice).GetQuantita()
          << " copie di quel libro.\n";
 
-    rlutil::resetColor();
+    rlutil::setColor(15);
     cout << "Premi qualsiasi tasto per tornare al menu...";
     rlutil::anykey();
     return;
@@ -301,7 +301,7 @@ void Vendita(vector<Libro> &l, vector<Acquisto> &a){
 
   rlutil::setColor(2);
   cout << "Vendita avvenuta con successo.\n";
-  rlutil::resetColor();
+  rlutil::setColor(15);
   cout << "Premi qualsiasi tasto per tornare al menu...";
   rlutil::anykey();
 
@@ -412,7 +412,7 @@ void Aggiunta_Cliente(vector<Cliente> &c){
 
     rlutil::setColor(2);
     cout << "Cliente aggiunto con successo.\n";
-    rlutil::resetColor();
+    rlutil::setColor(15);
     cout << "Premi qualsiasi tasto per tornare al menu...";
     rlutil::anykey();
 
@@ -431,7 +431,7 @@ void EliminaCliente(vector<Cliente> &c){
         rlutil::setColor(4);
         cout << "Errore! ID tessera non esistente!\n";
 
-        rlutil::resetColor();
+        rlutil::setColor(15);
         cout << "Premi qualsiasi tasto per tornare al menu...";
 
         rlutil::anykey();
@@ -444,7 +444,7 @@ void EliminaCliente(vector<Cliente> &c){
       rlutil::setColor(4);
       cout << "Errore! ID tessera non esistente!\n";
 
-      rlutil::resetColor();
+      rlutil::setColor(15);
       cout << "Premi qualsiasi tasto per tornare al menu...";
 
       rlutil::anykey();
@@ -455,7 +455,7 @@ void EliminaCliente(vector<Cliente> &c){
 
     rlutil::setColor(2);
     cout << "Eliminazione avvenuta con successo.\n";
-    rlutil::resetColor();
+    rlutil::setColor(15);
     cout << "Premi qualsiasi tasto per tornare al menu...";
     rlutil::anykey();
 
@@ -493,7 +493,7 @@ void save_l(vector<Libro> &l){
 
       rlutil::setColor(4);
       cout << "Errore nell'apertura del file di output!\n";
-      rlutil::resetColor();
+      rlutil::setColor(15);
       exit(0);
     };
 
@@ -526,7 +526,7 @@ void save_a(vector<Acquisto> &a){
 
     rlutil::setColor(4);
     cout << "Errore nell'apertura del file di output!\n";
-    rlutil::resetColor();
+    rlutil::setColor(15);
       exit(0);
   };
 
@@ -557,7 +557,7 @@ void save_c(vector<Cliente> &c){
     if (!output.good()){
         rlutil::setColor(4);
         cout << "Errore nell'apertura del file di output!\n";
-        rlutil::resetColor();
+        rlutil::setColor(15);
         exit(0);
     };
 
@@ -624,7 +624,7 @@ void LibriArrivati(vector<Libro> &l){
       cout << "Errore! Sono state ordinate solo " << l.at(i).GetOrdinati()
            << " copie di quel libro\n";
 
-      rlutil::resetColor();
+      rlutil::setColor(15);
       cout << "Premi qualsiasi tasto per tornare al menu...";
       rlutil::anykey();
 
@@ -658,7 +658,7 @@ int Input_int(){
     rlutil::setColor(4);
     cout << "Input non valido. ";
 
-    rlutil::resetColor();
+    rlutil::setColor(15);
     cout << "Inserisci un valore intero... ";
 
     cin.clear();
@@ -679,7 +679,7 @@ float Input_float(){
     rlutil::setColor(4);
     cout << "Input non valido. ";
 
-    rlutil::resetColor();
+    rlutil::setColor(15);
     cout << "Inserisci un valore numerico... ";
 
     cin.clear();
@@ -710,6 +710,8 @@ void StampaLibri(const vector<Libro> &l){
        << left << setw(11) << setfill(' ') << "Q. ordinata"
        << endl;
 
+  rlutil::setColor(15);
+
   for (i = 0; i < l.size(); i++ ){
 
     if (i%2 == 1){
@@ -737,6 +739,8 @@ void StampaAcquisti(const vector<Acquisto> &a){
        << left << setw(12) << setfill(' ') << "Data"
        << endl;
 
+  rlutil::setColor(15);
+
   for (i = 0; i < a.size(); i++ ){
 
     if (i%2 == 1){
@@ -763,6 +767,8 @@ void StampaClienti(const vector<Cliente> &c){
        << left << setw(35) << setfill(' ') << "Email"
        << left << setw(10) << setfill(' ') << "Tessera"
        << endl;
+
+  rlutil::setColor(15);
 
   for (i = 0; i < c.size(); i++ ){
 
