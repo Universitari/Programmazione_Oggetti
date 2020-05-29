@@ -14,7 +14,8 @@ class Cliente {
   static unsigned int max_clienti;
 
   public:
-
+/// Set nome del cliente
+/// @param tmp appoggio per nome cliente
   void SetNome(string tmp) {Nome = tmp;};
   void SetCognome(string tmp) {Cognome = tmp;};
   void SetEmail(string tmp) {Email = tmp;};
