@@ -11,10 +11,10 @@ void Menu_Principale(vector<Libro> &l, vector<Acquisto> &a, vector<Cliente> &c) 
 
 	rlutil::cls();
 
-	rlutil::setColor(3);
+	rlutil::setColor(ciano);
 	cout << "MENU PRINCIPALE\n";
 
-	rlutil::setColor(15);
+	rlutil::setColor(bianco);
 	cout <<	"1. Ricerca libro\n"
 					"2. Gestisci dati\n"
 					"3. Visualizza dati\n"
@@ -86,10 +86,10 @@ void Menu_GestioneDati(vector<Libro> &l, vector<Acquisto> &a, vector<Cliente> &c
 
 	rlutil::cls();
 
-	rlutil::setColor(3);
+	rlutil::setColor(ciano);
 	cout << "MENU GESTIONE DATI\n";
 
-	rlutil::setColor(15);
+	rlutil::setColor(bianco);
 
 	cout << "1. Aggiungi Libro\n"
 	        "2. Aggiungi Cliente\n"
@@ -124,12 +124,13 @@ void Menu_GestioneDati(vector<Libro> &l, vector<Acquisto> &a, vector<Cliente> &c
 			case(4):
 
 				rlutil::cls();
-		   	EliminaCliente(c);
-			  break;
+		   		EliminaCliente(c);
+		   		break;
 
 			case(5):
 
 				Menu_Ordinazioni(l, a, c);
+				break;
 
 	    default:
 	      return;
@@ -144,10 +145,10 @@ void Menu_Ordinazioni(vector<Libro> &l, vector<Acquisto> &a, vector<Cliente> &c)
 
   rlutil::cls();
 
-	rlutil::setColor(3);
+	rlutil::setColor(ciano);
 	cout << "MENU ORDINAZIONI\n";
 
-	rlutil::setColor(15);
+	rlutil::setColor(bianco);
 
 	cout << "1. Aggiungi libri ordinati\n"
 	        "2. Libri arrivati\n"
@@ -183,10 +184,10 @@ void Menu_Stampa(vector<Libro> &l, vector<Acquisto> &a, vector<Cliente> &c){
 
 	rlutil::cls();
 
-	rlutil::setColor(3);
+	rlutil::setColor(ciano);
 	cout << "MENU VISUALIZZAZIONE DATI\n";
 
-	rlutil::setColor(15);
+	rlutil::setColor(bianco);
 	
 	cout << "1. Stampa lista libri\n"
 				  "2. Stampa lista acquisti\n"
@@ -243,7 +244,7 @@ unsigned int Inserimento_Scelta(int max){
 		if (scelta <= max)
 			return scelta;
 
-		rlutil::setColor(4);
+		rlutil::setColor(rosso);
 		cout << "Numero non valido. ";
 		rlutil::resetColor();
 		cout <<	"Inserisci un numero... ";

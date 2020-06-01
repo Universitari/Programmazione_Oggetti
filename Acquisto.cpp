@@ -1,12 +1,13 @@
 #include <string>
 #include <iostream>
 #include "Acquisto.h"
+#include "Costanti.h"
 
 using namespace std;
 
 void Acquisto::SetPrezzo_Acq(float tmp) {
 
   if (Numero_tessera != 0)
-    SetPrezzo(tmp - tmp/10);
+    SetPrezzo(tmp - tmp/sconto);
     else SetPrezzo(tmp);
 };

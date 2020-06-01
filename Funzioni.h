@@ -2,6 +2,7 @@
 #include <vector>
 #include <iostream>
 #include <iomanip>
+#include "Costanti.h"
 #include "Libro.h"
 #include "Acquisto.h"
 #include "Cliente.h"
