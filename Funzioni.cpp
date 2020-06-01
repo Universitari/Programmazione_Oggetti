@@ -318,7 +318,6 @@ void Vendita(vector<Libro> &l, vector<Acquisto> &a){
   int indice = -1;
   int tmp_int;
   unsigned int tmp_tessera;
-  float tmp_float;
   Acquisto acq;
   Data tmp_data;
 
