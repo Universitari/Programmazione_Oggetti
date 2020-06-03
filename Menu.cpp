@@ -11,10 +11,10 @@ void Menu_Principale(vector<Libro> &l, vector<Acquisto> &a, vector<Cliente> &c) 
 
 	rlutil::cls();
 
-	rlutil::setColor(ciano);
+	rlutil::setColor(CIANO);
 	cout << "MENU PRINCIPALE\n";
 
-	rlutil::setColor(bianco);
+	rlutil::setColor(BIANCO);
 	cout <<	"1. Ricerca libro\n"
 					"2. Gestisci dati\n"
 					"3. Visualizza dati\n"
@@ -67,6 +67,12 @@ void Menu_Principale(vector<Libro> &l, vector<Acquisto> &a, vector<Cliente> &c) 
 				save_l(l);
 				save_a(a);
 				save_c(c);
+
+				rlutil::setColor(VERDE);
+					cout << "Salvataggio avvenuto con successo.\n";
+				rlutil::setColor(BIANCO);
+					cout << "Premi qualsiasi tasto per tornare al menu...";
+				rlutil::anykey();
 				break;
 
 		default:
@@ -86,18 +92,18 @@ void Menu_GestioneDati(vector<Libro> &l, vector<Acquisto> &a, vector<Cliente> &c
 
 	rlutil::cls();
 
-	rlutil::setColor(ciano);
+	rlutil::setColor(CIANO);
 	cout << "MENU GESTIONE DATI\n";
 
-	rlutil::setColor(bianco);
+	rlutil::setColor(BIANCO);
 
 	cout << "1. Aggiungi Libro\n"
 	        "2. Aggiungi Cliente\n"
 	        "3. Vendi libro\n"
 	        "4. Elimina Cliente\n"
 	        "5. Gestisci Ordinazioni\n"
-					"0. Indietro\n"
-					"Inserisci un numero... ";
+			"0. Indietro\n"
+			"Inserisci un numero... ";
 
   scelta = Inserimento_Scelta(5);
 
@@ -106,19 +112,19 @@ void Menu_GestioneDati(vector<Libro> &l, vector<Acquisto> &a, vector<Cliente> &c
 	    case(1):
 
 				rlutil::cls();
-        Aggiunta_Libro(l);
+        		Aggiunta_Libro(l);
         break;
 
 	    case(2):
 
 				rlutil::cls();
-        Aggiunta_Cliente(c);
+        		Aggiunta_Cliente(c);
         break;
 
 	    case(3):
 
 				rlutil::cls();
-        Vendita(l, a);
+	    		Vendita(l, a, c);
         break;
 
 			case(4):
@@ -145,10 +151,10 @@ void Menu_Ordinazioni(vector<Libro> &l, vector<Acquisto> &a, vector<Cliente> &c)
 
   rlutil::cls();
 
-	rlutil::setColor(ciano);
+	rlutil::setColor(CIANO);
 	cout << "MENU ORDINAZIONI\n";
 
-	rlutil::setColor(bianco);
+	rlutil::setColor(BIANCO);
 
 	cout << "1. Aggiungi libri ordinati\n"
 	        "2. Libri arrivati\n"
@@ -184,10 +190,10 @@ void Menu_Stampa(vector<Libro> &l, vector<Acquisto> &a, vector<Cliente> &c){
 
 	rlutil::cls();
 
-	rlutil::setColor(ciano);
+	rlutil::setColor(CIANO);
 	cout << "MENU VISUALIZZAZIONE DATI\n";
 
-	rlutil::setColor(bianco);
+	rlutil::setColor(BIANCO);
 	
 	cout << "1. Stampa lista libri\n"
 				  "2. Stampa lista acquisti\n"
@@ -244,7 +250,7 @@ unsigned int Inserimento_Scelta(int max){
 		if (scelta <= max)
 			return scelta;
 
-		rlutil::setColor(rosso);
+		rlutil::setColor(ROSSO);
 		cout << "Numero non valido. ";
 		rlutil::resetColor();
 		cout <<	"Inserisci un numero... ";

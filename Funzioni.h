@@ -84,19 +84,20 @@ void StampaClienti(const vector<Cliente> &c);
 ///
 /// @param l del vettore Libro
 /// @param tmp di tipo stringa per ISBN del libro
-int RicercaISBN(vector<Libro> &l, const string tmp);
+int RicercaISBN(const vector<Libro> &l, const string tmp);
 
 /// Ricerca del cliente per tessera
 ///
 /// @param c del vettore Cliente
-/// @param tessera per la ricerca del cliene
-int RicercaTessera(vector<Cliente> &c, unsigned int tessera);
+/// @param tessera per la ricerca del cliente
+int RicercaTessera(const vector<Cliente> &c, unsigned int tessera);
 
 /// Funzione per l'aggiunta di una vendita
 ///
 /// @param l del vettore Libro
 /// @param a del vettore Acquisto
-void Vendita(vector<Libro> &l, vector<Acquisto> &a);
+/// @param c del vettore Cliente
+void Vendita(vector<Libro> &l, vector<Acquisto> &a, const vector<Cliente> &c);
 
 /// Funzione per ordinazione dei libri
 ///
@@ -128,14 +129,14 @@ Data InserimentoData();
 /// Funzione per salvataggio in file del lavoro su libri
 ///
 /// @param l del vettore Libro
-void save_l(vector<Libro> &l);
+void save_l(const vector<Libro> &l);
 
 /// Funzione per salvataggio in file del lavoro su acquisti
 ///
 /// @param a del vettore Acquisto
-void save_a(vector<Acquisto> &a);
+void save_a(const vector<Acquisto> &a);
 
 /// Funzione per salvataggio in file del lavoro su clienti
 ///
 /// @param c del vettore Cliente
-void save_c(vector<Cliente> &c);
+void save_c(const vector<Cliente> &c);

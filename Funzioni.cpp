@@ -5,13 +5,13 @@
 
 using namespace std;
 
-// Inizializzazione di un vettore di "Libro" dal file "Libri.txt"
+// Inizializzazione di un vettore di "Libro" dal file NOME_FILE[0]
 void init_l(vector<Libro> &l) {
 
   ifstream input;
 
   // Apertura file
-  input.open("Libri.txt");
+  input.open(NOME_FILE[0]);
   // Controllo dell'apertura del file
   if (!input.good()){
     cout << "Errore nell'apertura del file";
@@ -66,13 +66,13 @@ void init_l(vector<Libro> &l) {
   input.close();
 };
 
-// Inizializzazione di un vettore di "Acquisto" dal file "Acquisti.txt"
+// Inizializzazione di un vettore di "Acquisto" dal file NOME_FILE[1]
 void init_a(vector<Acquisto> &a) {
 
   ifstream input;
 
   // Apertura file
-  input.open("Acquisti.txt");
+  input.open(NOME_FILE[1]);
   // Controllo dell'apertura del file
   if (!input.good()){
     cout << "Errore nell'apertura del file";
@@ -127,13 +127,13 @@ void init_a(vector<Acquisto> &a) {
   input.close();
 };
 
-// Inizializzazione di un vettore di "Cliente" dal file "Clienti.txt"
+// Inizializzazione di un vettore di "Cliente" dal file NOME_FILE[2]
 void init_c(vector<Cliente> &c){
 
   ifstream input;
 
   // Apertura file
-  input.open("Clienti.txt");
+  input.open(NOME_FILE[2]);
   // Controllo dell'apertura del file
   if (!input.good()){
     cout << "Errore nell'apertura del file";
@@ -206,12 +206,12 @@ void Aggiunta_Libro(vector<Libro> &l){
 
     // controllo sull'ISBN del libro
     if (RicercaISBN(l, tmp_string) != -1){
-      // Imposta colore rosso
-      rlutil::setColor(rosso);
+      // Imposta colore ROSSO
+      rlutil::setColor(ROSSO);
       cout << "Errore! ISBN già presente!\n";
 
-      // Imposta colore bianco
-      rlutil::setColor(bianco);
+      // Imposta colore BIANCO
+      rlutil::setColor(BIANCO);
       cout << "Premi qualsiasi tasto per tornare al menu...";
 
       // Mette in pausa il programma fino alla pressione di un tasto qualsiasi
@@ -242,7 +242,7 @@ void Aggiunta_Libro(vector<Libro> &l){
       if (tmp_char == 'y' || tmp_char == 'Y'){
         flag = false;   // Ferma il ciclo
         l.push_back(tmp_libro);   // Aggiunge il libro in coda al vettore di "Libro"
-        rlutil::setColor(verde);
+        rlutil::setColor(VERDE);
         cout << "Aggiunta avvenuta con successo.\n";
       }
         else if (tmp_char == 'n' || tmp_char == 'N')
@@ -252,7 +252,7 @@ void Aggiunta_Libro(vector<Libro> &l){
 
     } while(flag);
 
-      rlutil::setColor(bianco);
+      rlutil::setColor(BIANCO);
       cout << "Premi qualsiasi tasto per tornare al menu...";
       rlutil::anykey();
 
@@ -297,7 +297,7 @@ void PrintCliente(const Cliente tmp){
 }
 
 // Funziona di ricerca dell'ISBN che ritorna l'indice del vettore
-int RicercaISBN(vector<Libro> &l, const string tmp){
+int RicercaISBN(const vector<Libro> &l, const string tmp){
 
   int i = 0;
 
@@ -312,7 +312,7 @@ int RicercaISBN(vector<Libro> &l, const string tmp){
 }
 
 // Funzione per la gestione della vendita di libri
-void Vendita(vector<Libro> &l, vector<Acquisto> &a){
+void Vendita(vector<Libro> &l, vector<Acquisto> &a, const vector<Cliente> &c){
 
   string ISBN_Venduto;
   int indice = -1;
@@ -329,9 +329,9 @@ void Vendita(vector<Libro> &l, vector<Acquisto> &a){
 
   // Controllo per ISBN già presenti nel vettore
   if (indice == -1){
-      rlutil::setColor(rosso);
+      rlutil::setColor(ROSSO);
       cout << "ISBN errato o inesistente!\n";
-      rlutil::setColor(bianco);
+      rlutil::setColor(BIANCO);
       cout << "Premi qualsiasi tasto per tornare al menu...";
       rlutil::anykey();
       return;
@@ -342,11 +342,11 @@ void Vendita(vector<Libro> &l, vector<Acquisto> &a){
 
   if (tmp_int > l.at(indice).GetQuantita()){
 
-    rlutil::setColor(rosso);
+    rlutil::setColor(ROSSO);
     cout << "Errore! Sono disponibili solo " << l.at(indice).GetQuantita()
          << " copie di quel libro.\n";
 
-    rlutil::setColor(bianco);
+    rlutil::setColor(BIANCO);
     cout << "Premi qualsiasi tasto per tornare al menu...";
     rlutil::anykey();
     return;
@@ -358,6 +358,16 @@ void Vendita(vector<Libro> &l, vector<Acquisto> &a){
 
   cout << "inserire il numero della tessera del cliente (0 se non tesserato): ";
   tmp_tessera = Input_int();
+
+  if (RicercaTessera(c, tmp_tessera) == -1){
+	  rlutil::setColor(ROSSO);
+	  cout << "Errore! Tessera non registrata\n";
+
+	  rlutil::setColor(BIANCO);
+	  cout << "Premi qualsiasi tasto per tornare al menu...";
+	  rlutil::anykey();
+	  return;
+  };
 
   acq.SetTessera(tmp_tessera);
 
@@ -376,7 +386,7 @@ void Vendita(vector<Libro> &l, vector<Acquisto> &a){
         if (tmp_char == 'y' || tmp_char == 'Y'){
           flag = false;   // Ferma il ciclo
           a.push_back(acq);   // Aggiunge l'acquisto in coda al vettore di "Acquisto"
-          rlutil::setColor(verde);
+          rlutil::setColor(VERDE);
           cout << "Aggiunta avvenuta con successo.\n";
         }
           else if (tmp_char == 'n' || tmp_char == 'N')
@@ -386,7 +396,7 @@ void Vendita(vector<Libro> &l, vector<Acquisto> &a){
 
       } while(flag);
 
-        rlutil::setColor(bianco);
+        rlutil::setColor(BIANCO);
         cout << "Premi qualsiasi tasto per tornare al menu...";
         rlutil::anykey();
 
@@ -445,7 +455,7 @@ Data InserimentoData(){
   cout << "Anno: ";
   y = Input_int();
 
-  if (y < Anno_minimo){
+  if (y < ANNO_MINIMO){
     cout << "Anno non valido. Reinserire la data.\n";
     continue;
   }
@@ -511,7 +521,7 @@ void Aggiunta_Cliente(vector<Cliente> &c){
       if (tmp_char == 'y' || tmp_char == 'Y'){
         flag = false;
         c.push_back(tmp_cliente);
-        rlutil::setColor(verde);
+        rlutil::setColor(VERDE);
         cout << "Aggiunta avvenuta con successo.\n";
       }
         else if (tmp_char == 'n' || tmp_char == 'N')
@@ -520,7 +530,7 @@ void Aggiunta_Cliente(vector<Cliente> &c){
           cout << "inserire una scelta valida...";
     } while(flag);
 
-    rlutil::setColor(bianco);
+    rlutil::setColor(BIANCO);
     cout << "Premi qualsiasi tasto per tornare al menu...";
     rlutil::anykey();
 }
@@ -536,10 +546,10 @@ void EliminaCliente(vector<Cliente> &c){
 
       if (tessera < c.front().GetTessera() || tessera > c.back().GetTessera()){
 
-        rlutil::setColor(rosso);
+        rlutil::setColor(ROSSO);
         cout << "Errore! ID tessera non esistente!\n";
 
-        rlutil::setColor(bianco);
+        rlutil::setColor(BIANCO);
         cout << "Premi qualsiasi tasto per tornare al menu...";
 
         rlutil::anykey();
@@ -549,10 +559,10 @@ void EliminaCliente(vector<Cliente> &c){
     indice = RicercaTessera(c, tessera);
     if (indice == -1){
 
-      rlutil::setColor(rosso);
+      rlutil::setColor(ROSSO);
       cout << "Errore! ID tessera non esistente!\n";
 
-      rlutil::setColor(bianco);
+      rlutil::setColor(BIANCO);
       cout << "Premi qualsiasi tasto per tornare al menu...";
 
       rlutil::anykey();
@@ -561,16 +571,16 @@ void EliminaCliente(vector<Cliente> &c){
 
     c.erase(c.begin()+indice);
 
-    rlutil::setColor(verde);
+    rlutil::setColor(VERDE);
     cout << "Eliminazione avvenuta con successo.\n";
-    rlutil::setColor(bianco);
+    rlutil::setColor(BIANCO);
     cout << "Premi qualsiasi tasto per tornare al menu...";
     rlutil::anykey();
 
 }
 
 // Funzione ricerca tessera che ritorna l'indice del vettore
-int RicercaTessera(vector<Cliente> &c, unsigned int tessera){
+int RicercaTessera(const vector<Cliente> &c, unsigned int tessera){
 
     int min = 0;
     int max = c.size() - 1;
@@ -593,18 +603,18 @@ int RicercaTessera(vector<Cliente> &c, unsigned int tessera){
 }
 
 // Funzione di salvataggio del vettore di "Libro" su file
-void save_l(vector<Libro> &l){
+void save_l(const vector<Libro> &l){
 
     ofstream output;
 
-    output.open("Libri.txt"); // Apertura file
+    output.open(NOME_FILE[0]); // Apertura file
 
     // Controllo sull'apertura del file
     if (!output.good()){
 
-      rlutil::setColor(rosso);
+      rlutil::setColor(ROSSO);
       cout << "Errore nell'apertura del file di output!\n";
-      rlutil::setColor(bianco);
+      rlutil::setColor(BIANCO);
       exit(0);
     };
 
@@ -628,18 +638,18 @@ void save_l(vector<Libro> &l){
 }
 
 // Funzione di salvataggio del vettore di "Acquisto" su file
-void save_a(vector<Acquisto> &a){
+void save_a(const vector<Acquisto> &a){
 
   ofstream output;
 
-  output.open("Acquisti.txt"); // Apertura file
+  output.open(NOME_FILE[1]); // Apertura file
 
   // Controllo sull'apertura del file
   if (!output.good()){
 
-    rlutil::setColor(rosso);
+    rlutil::setColor(ROSSO);
     cout << "Errore nell'apertura del file di output!\n";
-    rlutil::setColor(bianco);
+    rlutil::setColor(BIANCO);
       exit(0);
   };
 
@@ -663,17 +673,17 @@ void save_a(vector<Acquisto> &a){
 }
 
 // Funzione di salvataggio del vettore di "Cliente" su file
-void save_c(vector<Cliente> &c){
+void save_c(const vector<Cliente> &c){
 
     ofstream output;
 
-    output.open("Clienti.txt"); // Apertura file
+    output.open(NOME_FILE[2]); // Apertura file
 
     // Controllo sull'apertura del file
     if (!output.good()){
-        rlutil::setColor(rosso);
+        rlutil::setColor(ROSSO);
         cout << "Errore nell'apertura del file di output!\n";
-        rlutil::setColor(bianco);
+        rlutil::setColor(BIANCO);
         exit(0);
     };
 
@@ -709,9 +719,9 @@ void OrdinaLibri(vector<Libro> &l){
     i = RicercaISBN(l, tmp_string);
 
     if (i == -1){
-      rlutil::setColor(rosso);
+      rlutil::setColor(ROSSO);
       cout << "ISBN errato o inesistente!\n";
-      rlutil::setColor(bianco);
+      rlutil::setColor(BIANCO);
       cout << "Premi qualsiasi tasto per tornare al menu...";
       rlutil::anykey();
       return;
@@ -722,9 +732,9 @@ void OrdinaLibri(vector<Libro> &l){
 
     l.at(i).SetOrdinati(l.at(i).GetOrdinati() + quantita);
 
-    rlutil::setColor(verde);
+    rlutil::setColor(VERDE);
     cout << "Ordinazione avvenuta con successo.\n";
-    rlutil::setColor(bianco);
+    rlutil::setColor(BIANCO);
     cout << "Premi qualsiasi tasto per tornare al menu...";
     rlutil::anykey();
 
@@ -743,9 +753,9 @@ void LibriArrivati(vector<Libro> &l){
     i = RicercaISBN(l, tmp_string);
 
     if (i == -1){
-      rlutil::setColor(rosso);
+      rlutil::setColor(ROSSO);
       cout << "ISBN errato o inesistente!\n";
-      rlutil::setColor(bianco);
+      rlutil::setColor(BIANCO);
       cout << "Premi qualsiasi tasto per tornare al menu...";
       rlutil::anykey();
       return;
@@ -756,11 +766,11 @@ void LibriArrivati(vector<Libro> &l){
 
     if (quantita > l.at(i).GetOrdinati()){
 
-      rlutil::setColor(rosso);
+      rlutil::setColor(ROSSO);
       cout << "Errore! Sono state ordinate solo " << l.at(i).GetOrdinati()
            << " copie di quel libro\n";
 
-      rlutil::setColor(bianco);
+      rlutil::setColor(BIANCO);
       cout << "Premi qualsiasi tasto per tornare al menu...";
       rlutil::anykey();
 
@@ -770,9 +780,9 @@ void LibriArrivati(vector<Libro> &l){
     l.at(i).SetOrdinati(l.at(i).GetOrdinati() - quantita);
     l.at(i).SetQuantita(l.at(i).GetQuantita() + quantita);
 
-    rlutil::setColor(verde);
+    rlutil::setColor(VERDE);
     cout << "Aggiornamento avvenuto con successo.\n";
-    rlutil::setColor(bianco);
+    rlutil::setColor(BIANCO);
     cout << "Premi qualsiasi tasto per tornare al menu...";
     rlutil::anykey();
 
@@ -799,10 +809,10 @@ int Input_int(){
 
   while (!(cin >> x)){
 
-    rlutil::setColor(rosso);
+    rlutil::setColor(ROSSO);
     cout << "Input non valido. ";
 
-    rlutil::setColor(bianco);
+    rlutil::setColor(BIANCO);
     cout << "Inserisci un valore intero... ";
 
     cin.clear();
@@ -821,10 +831,10 @@ float Input_float(){
 
   while (!(cin >> x)){
 
-    rlutil::setColor(rosso);
+    rlutil::setColor(ROSSO);
     cout << "Input non valido. ";
 
-    rlutil::setColor(bianco);
+    rlutil::setColor(BIANCO);
     cout << "Inserisci un valore numerico... ";
 
     cin.clear();
@@ -848,7 +858,7 @@ void StampaLibri(const vector<Libro> &l){
 
   int i;
 
-  rlutil::setColor(ciano);
+  rlutil::setColor(CIANO);
 
 // Formattazione del testo e stampa identificatori della colonna
   cout << left << setw(49) << setfill(' ') << "Titolo, Autore"
@@ -858,13 +868,13 @@ void StampaLibri(const vector<Libro> &l){
        << left << setw(11) << setfill(' ') << "Q. ordinata"
        << endl;
 
-  rlutil::setColor(bianco);
+  rlutil::setColor(BIANCO);
 
   for (i = 0; i < l.size(); i++ ){
 
     // Gestione del colore alternato del background
     if (i%2 == 1){
-      rlutil::setBackgroundColor(grigio);
+      rlutil::setBackgroundColor(GRIGIO);
       rlutil::setColor(0);
     } else rlutil::resetColor();
 
@@ -882,7 +892,7 @@ void StampaAcquisti(const vector<Acquisto> &a){
 
   int i;
 
-  rlutil::setColor(ciano);
+  rlutil::setColor(CIANO);
 
 // Formattazione del testo e stampa identificatori della colonna
   cout << left << setw(20) << setfill(' ') << "ISBN"
@@ -891,13 +901,13 @@ void StampaAcquisti(const vector<Acquisto> &a){
        << left << setw(12) << setfill(' ') << "Data"
        << endl;
 
-  rlutil::setColor(bianco);
+  rlutil::setColor(BIANCO);
 
   for (i = 0; i < a.size(); i++ ){
 
     // Gestione del colore alternato del background
     if (i%2 == 1){
-      rlutil::setBackgroundColor(grigio);
+      rlutil::setBackgroundColor(GRIGIO);
       rlutil::setColor(0);
     } else rlutil::resetColor();
 
@@ -914,7 +924,7 @@ void StampaClienti(const vector<Cliente> &c){
 
   int i;
 
-  rlutil::setColor(ciano);
+  rlutil::setColor(CIANO);
 
   // Formattazione del testo e stampa identificatori della colonna
   cout << left << setw(20) << setfill(' ') << "Nome"
@@ -923,13 +933,13 @@ void StampaClienti(const vector<Cliente> &c){
        << left << setw(10) << setfill(' ') << "Tessera"
        << endl;
 
-  rlutil::setColor(bianco);
+  rlutil::setColor(BIANCO);
 
   for (i = 0; i < c.size(); i++ ){
 
     // Gestione del colore alternato del background
     if (i%2 == 1){
-      rlutil::setBackgroundColor(grigio);
+      rlutil::setBackgroundColor(GRIGIO);
       rlutil::setColor(0);
     } else rlutil::resetColor();
 
